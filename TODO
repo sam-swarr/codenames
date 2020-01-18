@@ -1,6 +1,6 @@
 - display message if no room found with given code
 - require non-empty name
-
+- datastore validation rule to ensure logged in user can only add / remove themselves from player lists
 
 player:
   - role: [UNSET, BLUE_SPY, RED_SPY, BLUE_SPYMASTER, RED_SPYMASTER]
