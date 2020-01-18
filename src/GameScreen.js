@@ -21,15 +21,17 @@ export default class GameScreen extends React.Component {
   }
 
   async removeUserFromGame() {
-    console.log("REMOVE USER");
-    debugger;
     const currentPlayerRef = firebase.database()
       .ref('games/' + this.props.gameID + '/players/' + getCurrentUserID());
     await currentPlayerRef.remove();
   }
 
   componentDidMount() {
-    window.addEventListener('beforeunload', this.removeUser);
+    var isOnIOS = navigator.userAgent.match(/iPad/i)
+      || navigator.userAgent.match(/iPhone/i)
+      || navigator.userAgent.match(/iPod/i);
+    var eventType = isOnIOS ? 'pagehide' : 'unload';
+    window.addEventListener(eventType, this.removeUser);
     const gameRef = firebase.database().ref('games/' + this.props.gameID);
     gameRef.on('value', snapshot => {
       this.setState(snapshot.val());
@@ -37,7 +39,7 @@ export default class GameScreen extends React.Component {
   }
 
   componentWillUnmount() {
-    window.removeEventListener('beforeunload', this.removeUser);
+    window.removeEventListener('unload', this.removeUser);
   }
 
   render() {
