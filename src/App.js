@@ -67,7 +67,7 @@ export default class App extends React.Component {
             newPlayer[uid] = {
               name: name,
             };
-            const gameRef = firebase.database().ref("games/" + gameID + "/players")
+            firebase.database().ref("games/" + gameID + "/players")
               .update(newPlayer).then(() => {
                 this.setState({
                   gameID: gameID,

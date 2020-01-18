@@ -11,10 +11,10 @@ export default class StartGameForm extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {nameValue: '', roomCodeValue: ''};
-
-    this.handleNameChange = this.handleNameChange.bind(this);
-    this.handleRoomCodeChange = this.handleRoomCodeChange.bind(this);
+    this.state = {
+      nameValue: '',
+      roomCodeValue: '',
+    };
   }
 
   handleNameChange(event) {
@@ -31,7 +31,10 @@ export default class StartGameForm extends React.Component {
         <div>
           <label>
             Name:
-            <input type="text" value={this.state.nameValue} onChange={this.handleNameChange} />
+            <input type="text"
+              value={this.state.nameValue}
+              onChange={this.handleNameChange.bind(this)}
+            />
           </label>
         </div>
         <p> ---- </p>
@@ -46,7 +49,10 @@ export default class StartGameForm extends React.Component {
         <div>
           <label>
             Room Code:
-            <input type="text" value={this.state.roomCodeValue} onChange={this.handleRoomCodeChange} />
+            <input type="text"
+              value={this.state.roomCodeValue}
+              onChange={this.handleRoomCodeChange.bind(this)}
+            />
           </label>
           <Button name="Join Existing Game" onClick={
             () => {this.props.onJoinGameClick(this.state.nameValue, this.state.roomCodeValue)}

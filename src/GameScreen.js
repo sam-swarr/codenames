@@ -10,6 +10,13 @@ export default class GameScreen extends React.Component {
     super(props);
   }
 
+  // componentDidMount() {
+  //   const gameRef = firebase.database().ref('games/' + this.props.gameID);
+  //   gameRef.on('value', snapshot => {
+  //
+  //   });
+  // }
+
   render() {
     return (
       <div>
