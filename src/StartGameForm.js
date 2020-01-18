@@ -1,0 +1,64 @@
+import React from "react";
+import PropTypes from "prop-types";
+
+import Button from './Button';
+
+export default class StartGameForm extends React.Component {
+  static propTypes = {
+    onCreateGameClick: PropTypes.func,
+    onJoinGameClick: PropTypes.func,
+  };
+
+  constructor(props) {
+    super(props);
+    this.state = {nameValue: '', roomCodeValue: ''};
+
+    this.handleNameChange = this.handleNameChange.bind(this);
+    this.handleRoomCodeChange = this.handleRoomCodeChange.bind(this);
+    this.handleCreateGameClick = this.handleCreateGameClick.bind(this);
+    this.handleJoinGameClick = this.handleJoinGameClick.bind(this);
+  }
+
+  handleNameChange(event) {
+    this.setState({nameValue: event.target.value});
+  }
+
+  handleRoomCodeChange(event) {
+    this.setState({roomCodeValue: event.target.value});
+  }
+
+  handleCreateGameClick(event) {
+    this.props.onCreateGameClick(this.state.nameValue);
+  }
+
+  handleJoinGameClick(event) {
+    this.props.onJoinGameClick(this.state.nameValue, this.state.roomCodeValue);
+  }
+
+  render() {
+    return (
+      <div>
+        <div>
+          <label>
+            Name:
+            <input type="text" value={this.state.nameValue} onChange={this.handleNameChange} />
+          </label>
+        </div>
+        <p> ---- </p>
+        <div>
+          <Button name="Create New Game" onClick={this.handleCreateGameClick}/>
+        </div>
+        <div>
+          <p> -- OR -- </p>
+        </div>
+        <div>
+          <label>
+            Room Code:
+            <input type="text" value={this.state.roomCodeValue} onChange={this.handleRoomCodeChange} />
+          </label>
+          <Button name="Join Existing Game" onClick={this.handleJoinGameClick}/>
+        </div>
+      </div>
+    );
+  }
+}
