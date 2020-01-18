@@ -1,0 +1,2 @@
+- display message if no room found with given code
+- require non-empty name

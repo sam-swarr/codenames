@@ -15,8 +15,6 @@ export default class StartGameForm extends React.Component {
 
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleRoomCodeChange = this.handleRoomCodeChange.bind(this);
-    this.handleCreateGameClick = this.handleCreateGameClick.bind(this);
-    this.handleJoinGameClick = this.handleJoinGameClick.bind(this);
   }
 
   handleNameChange(event) {
@@ -25,14 +23,6 @@ export default class StartGameForm extends React.Component {
 
   handleRoomCodeChange(event) {
     this.setState({roomCodeValue: event.target.value});
-  }
-
-  handleCreateGameClick(event) {
-    this.props.onCreateGameClick(this.state.nameValue);
-  }
-
-  handleJoinGameClick(event) {
-    this.props.onJoinGameClick(this.state.nameValue, this.state.roomCodeValue);
   }
 
   render() {
@@ -46,7 +36,9 @@ export default class StartGameForm extends React.Component {
         </div>
         <p> ---- </p>
         <div>
-          <Button name="Create New Game" onClick={this.handleCreateGameClick}/>
+          <Button name="Create New Game" onClick={
+            () => {this.props.onCreateGameClick(this.state.nameValue)}
+          }/>
         </div>
         <div>
           <p> -- OR -- </p>
@@ -56,7 +48,9 @@ export default class StartGameForm extends React.Component {
             Room Code:
             <input type="text" value={this.state.roomCodeValue} onChange={this.handleRoomCodeChange} />
           </label>
-          <Button name="Join Existing Game" onClick={this.handleJoinGameClick}/>
+          <Button name="Join Existing Game" onClick={
+            () => {this.props.onJoinGameClick(this.state.nameValue, this.state.roomCodeValue)}
+          }/>
         </div>
       </div>
     );
