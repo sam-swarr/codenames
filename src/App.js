@@ -25,6 +25,7 @@ export default class App extends React.Component {
     super(props);
     this.state = {
       gameID: null,
+      initialGameState: {},
     };
   }
 
@@ -37,12 +38,14 @@ export default class App extends React.Component {
       uid: uid,
       name: name,
     };
-    await newGameRef.update({
+    const newGameState = {
       players: players,
       roomCode: roomCode,
-    });
+    };
+    await newGameRef.update(newGameState);
     this.setState({
       gameID: newGameRef.getKey(),
+      initialGameState: newGameState,
     });
   }
 
@@ -54,23 +57,46 @@ export default class App extends React.Component {
       .equalTo(roomCodeUpper)
       .limitToLast(1)
       .once('value');
-    const value = snapshot.val();
-    if (!value) {
+    const gamesQueryResult = snapshot.val();
+    if (!gamesQueryResult) {
       console.log("NO ROOM FOUND");
     } else {
       console.log("FOUND ROOM");
-      console.log(value);
-      const gameID = Object.keys(value)[0];
+      console.log(gamesQueryResult);
+      const gameID = Object.keys(gamesQueryResult)[0];
       const newPlayer = {}
       newPlayer[uid] = {
         uid: uid,
         name: name,
       };
+      const newGameState = gamesQueryResult[gameID];
+      newGameState.players = {
+        ...newGameState.players,
+        ...newPlayer,
+      };
       await firebase.database().ref("games/" + gameID + "/players").update(newPlayer);
       this.setState({
         gameID: gameID,
+        initialGameState: newGameState,
       });
     }
+  }
+
+  componentDidMount() {
+    var isOnIOS = navigator.userAgent.match(/iPad/i)
+      || navigator.userAgent.match(/iPhone/i)
+      || navigator.userAgent.match(/iPod/i);
+    var eventType = isOnIOS ? 'pagehide' : 'unload';
+    window.addEventListener(eventType, this.removeUser);
+
+    const gameRef = firebase.database().ref('games/' + this.props.gameID);
+    gameRef.on('value', snapshot => {
+      this.setState(snapshot.val());
+    });
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('unload', this.removeUser);
   }
 
   render() {
@@ -92,7 +118,7 @@ export default class App extends React.Component {
       );
     } else {
       return (
-        <GameScreen gameID={this.state.gameID} />
+        <GameScreen gameID={this.state.gameID} initialGameState={this.state.initialGameState} />
       )
     }
   }

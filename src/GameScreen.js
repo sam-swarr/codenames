@@ -10,12 +10,13 @@ import "firebase/database";
 export default class GameScreen extends React.Component {
   static propTypes = {
     gameID: PropTypes.string,
+    initialGameState: PropTypes.object,
   };
 
   constructor(props) {
     super(props);
     this.state = {
-      players: {},
+      players: this.props.initialGameState.players,
     }
     this.removeUser = this.removeUserFromGame.bind(this);
   }
@@ -49,7 +50,7 @@ export default class GameScreen extends React.Component {
     return (
       <div>
           <p> Room Code: {this.state.roomCode} </p>
-          <PlayerList players={this.state.players} />
+          <PlayerList gameID={this.props.gameID} players={this.state.players} />
       </div>
     );
   }

@@ -6,6 +6,7 @@ import PlayerRoleSelector from './PlayerRoleSelector';
 
 export default class PlayerList extends React.Component {
   static propTypes = {
+    gameID: PropTypes.string,
     players: PropTypes.object,
   };
 
@@ -28,7 +29,7 @@ export default class PlayerList extends React.Component {
           {list}
         </div>
         <div>
-          <PlayerRoleSelector players={this.props.players} />
+          <PlayerRoleSelector gameID={this.props.gameID} players={this.props.players} />
         </div>
       </div>
     );

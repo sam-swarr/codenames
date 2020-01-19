@@ -14,7 +14,7 @@ export default class PlayerListItem extends React.Component {
     return (
       <div>
         <div>
-          <p>{this.props.playerData.name}</p>
+          <p>{this.props.playerData.name} -- {this.props.playerData.role}</p>
         </div>
       </div>
     );

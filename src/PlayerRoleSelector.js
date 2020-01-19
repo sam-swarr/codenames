@@ -5,8 +5,12 @@ import PlayerRoleButton from './PlayerRoleButton';
 import {getCurrentUserID} from './UserAuth';
 import {ROLES} from './Utils';
 
+import * as firebase from "firebase/app";
+import "firebase/database";
+
 export default class PlayerRoleSelector extends React.Component {
   static propTypes = {
+    gameID: PropTypes.string,
     players: PropTypes.object,
   };
 
@@ -15,7 +19,9 @@ export default class PlayerRoleSelector extends React.Component {
   }
 
   onClick(roleType) {
-    console.log(roleType);
+    firebase.database().ref(
+      "games/" + this.props.gameID + "/players/" + getCurrentUserID()
+    ).update({role: roleType});
   }
 
   _roleTaken(role) {
@@ -25,10 +31,9 @@ export default class PlayerRoleSelector extends React.Component {
   }
 
   render() {
-    debugger;
     const doesPlayerHaveRole = !!this.props.players[getCurrentUserID()].role;
     return (
-      <div>
+      <div hidden={doesPlayerHaveRole}>
         <PlayerRoleButton
           roleType={ROLES.BLUE_SPYMASTER}
           onClick={this.onClick.bind(this, ROLES.BLUE_SPYMASTER)}
