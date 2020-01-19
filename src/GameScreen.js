@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 
 import PlayerList from './PlayerList';
 import {getCurrentUserID} from './UserAuth';
+import {ROLES} from './Utils';
 
 import * as firebase from "firebase/app";
 import "firebase/database";
@@ -44,13 +45,40 @@ export default class GameScreen extends React.Component {
     window.removeEventListener('unload', this.removeUser);
   }
 
+  _roleTaken(role) {
+    return Object.values(this.state.players).some((playerData) => {
+      return playerData.role && playerData.role === role;
+    });
+  }
+
+  _canStartGame() {
+    return !this.state.gameStarted
+      && this._roleTaken(ROLES.BLUE_SPYMASTER)
+      && this._roleTaken(ROLES.RED_SPYMASTER)
+      && this._roleTaken(ROLES.BLUE_SPY)
+      && this._roleTaken(ROLES.RED_SPY);
+  }
+
+  startGame() {
+    const gameRef = firebase.database().ref('games/' + this.props.gameID);
+    gameRef.update({gameStarted: true});
+  }
+
   render() {
     console.log("STATE: ");
     console.log(this.state);
     return (
       <div>
+        <div>
           <p> Room Code: {this.state.roomCode} </p>
           <PlayerList gameID={this.props.gameID} players={this.state.players} />
+        </div>
+        <div>
+          <button hidden={!this._canStartGame()} onClick={this.startGame.bind(this)}>Start Game</button>
+        </div>
+        <div>
+
+        </div>
       </div>
     );
   }
