@@ -32,6 +32,7 @@ export default class GameScreen extends React.Component {
       || navigator.userAgent.match(/iPod/i);
     var eventType = isOnIOS ? 'pagehide' : 'unload';
     window.addEventListener(eventType, this.removeUser);
+
     const gameRef = firebase.database().ref('games/' + this.props.gameID);
     gameRef.on('value', snapshot => {
       this.setState(snapshot.val());

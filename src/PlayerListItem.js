@@ -13,7 +13,9 @@ export default class PlayerListItem extends React.Component {
   render() {
     return (
       <div>
+        <div>
           <p>{this.props.playerData.name}</p>
+        </div>
       </div>
     );
   }

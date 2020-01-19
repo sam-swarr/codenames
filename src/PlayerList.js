@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import PlayerListItem from './PlayerListItem';
+import PlayerRoleSelector from './PlayerRoleSelector';
 
 export default class PlayerList extends React.Component {
   static propTypes = {
@@ -25,6 +26,9 @@ export default class PlayerList extends React.Component {
         </div>
         <div>
           {list}
+        </div>
+        <div>
+          <PlayerRoleSelector players={this.props.players} />
         </div>
       </div>
     );
