@@ -84,7 +84,7 @@ export default class GameScreen extends React.Component {
           <button hidden={!this._canStartGame()} onClick={this.startGame.bind(this)}>Start Game</button>
         </div>
         <div>
-          <GameBoard gameBoardState={this.state.gameBoardState} />
+          <GameBoard playerRole={this.state.players[getCurrentUserID()].role} gameBoardState={this.state.gameBoardState} />
         </div>
       </div>
     );

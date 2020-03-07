@@ -1,8 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import {isSpymaster, ROLES, TEAMS} from './Utils';
+
 export default class GameBoardWord extends React.Component {
   static propTypes = {
+    playerRole: PropTypes.oneOf(Object.values(ROLES)),
     wordState: PropTypes.object,
   };
 
@@ -11,9 +14,29 @@ export default class GameBoardWord extends React.Component {
     this.state = {};
   }
 
+  _getCSSClasses() {
+      const classes = ['Board-word-wrapper'];
+      if (isSpymaster(this.props.playerRole)) {
+          switch (this.props.wordState.team) {
+            case TEAMS.RED:
+                classes.push('Red-word');
+                break;
+            case TEAMS.BLUE:
+                classes.push('Blue-word');
+                break;
+            case TEAMS.ASSASSIN:
+                classes.push('Assassin-word');
+                break;
+            default:
+                break;
+          }
+      }
+      return classes;
+  }
+
   render() {
     return (
-      <div className="Board-word-wrapper">
+      <div className={this._getCSSClasses().join(' ')}>
         <p className="Board-word"> {this.props.wordState.word} </p>
       </div>
     );

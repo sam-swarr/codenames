@@ -5,6 +5,10 @@ export const ROLES = {
   RED_SPY: 'RED_SPY',
 }
 
+export function isSpymaster(role) {
+  return role === ROLES.BLUE_SPYMASTER || role === ROLES.RED_SPYMASTER; 
+}
+
 export const TEAMS = {
   BLUE: 'BLUE',
   RED: 'RED',
@@ -64,12 +68,12 @@ export function createGameBoard(redGoesFirst) {
 
   const shuffledWords = _shuffleArray(WORD_LIST).slice(0, numWords);
 
-  const types = new Array(numWords);
-  types.fill(TEAMS.NEUTRAL);
-  types.fill(TEAMS.RED, 0, numRed);
-  types.fill(TEAMS.BLUE, numRed, numRed + numBlue);
-  types[numRed + numBlue] = TEAMS.ASSASSIN;
-  const shuffledTypes = _shuffleArray(types);
+  const teamAssignments = new Array(numWords);
+  teamAssignments.fill(TEAMS.NEUTRAL);
+  teamAssignments.fill(TEAMS.RED, 0, numRed);
+  teamAssignments.fill(TEAMS.BLUE, numRed, numRed + numBlue);
+  teamAssignments[numRed + numBlue] = TEAMS.ASSASSIN;
+  const shuffledTeamAssignments = _shuffleArray(teamAssignments);
 
   const gameBoard = [];
   for (let i = 0; i < GAME_BOARD_HEIGHT; i++) {
@@ -77,7 +81,7 @@ export function createGameBoard(redGoesFirst) {
     for (let j = 0; j < GAME_BOARD_WIDTH; j++) {
       row[j] = {
         word: shuffledWords.pop(),
-        type: shuffledTypes.pop(),
+        team: shuffledTeamAssignments.pop(),
         isRevealed: false,
       };
     }

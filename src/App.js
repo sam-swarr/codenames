@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from './logo.svg';
+import logo from './images/spylogo.png';
 import './App.css';
 
 import Button from './Button';
@@ -16,9 +16,9 @@ import "firebase/auth";
 // Initialize Firebase
 firebase.initializeApp(FIREBASE_CONFIG);
 
-function logoutUser() {
-  firebase.auth().signOut().then(() => {console.log("LOGOUT");});
-}
+// function logoutUser() {
+//   firebase.auth().signOut().then(() => {console.log("LOGOUT");});
+// }
 
 export default class App extends React.Component {
   constructor(props) {
@@ -121,10 +121,9 @@ export default class App extends React.Component {
       return (
         <div className="App">
           <header className="App-header">
-            <Button name="Logout" onClick={logoutUser}/>
             <img src={logo} className="App-logo" alt="logo" />
             <p>
-              Agent Appellations!
+              Agent Appellations
             </p>
             <StartGameForm
               onCreateGameClick={this.createNewGame.bind(this)}

@@ -1,5 +1,8 @@
 - display message if no room found with given code
 - require non-empty name
+  - rather, make flow be:
+    1) enter name first (is it possible to retrieve last name used with anonymous auth?)
+    2) then choose to create new game or join existing
 - datastore validation rule to ensure logged in user can only add / remove themselves from player lists
 
 player:

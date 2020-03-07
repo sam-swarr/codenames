@@ -2,9 +2,11 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import GameBoardWord from './GameBoardWord';
+import {ROLES} from './Utils';
 
 export default class GameBoard extends React.Component {
   static propTypes = {
+    playerRole: PropTypes.oneOf(Object.values(ROLES)),
     gameBoardState: PropTypes.array,
   };
 
@@ -20,10 +22,10 @@ export default class GameBoard extends React.Component {
     const rows = [];
     for (let i = 0; i < this.props.gameBoardState.length; i++) {
         const row = this.props.gameBoardState[i].map(wordState => {
-            return <GameBoardWord wordState={wordState} />;
+            return <GameBoardWord key={wordState.word} playerRole={this.props.playerRole} wordState={wordState} />;
         })
         rows.push(
-            <div className="Board-row">
+            <div key={i} className="Board-row">
                 {row}
             </div>
         );
