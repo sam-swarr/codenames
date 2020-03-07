@@ -6,6 +6,13 @@ export const ROLES = {
   RED_SPY: 'RED_SPY',
 }
 
+export const WORD_TYPES = {
+  BLUE: 'BLUE',
+  RED: 'RED',
+  NEUTRAL: 'NEUTRAL',
+  ASSASSIN: 'ASSASSIN',
+}
+
 export function getRoleLabel(role) {
   switch (role) {
     case ROLES.BLUE_SPYMASTER:
@@ -28,6 +35,56 @@ export function createRoomCode() {
     result += chars.charAt(Math.floor(Math.random() * chars.length));
   }
   return result;
+}
+
+const GAME_BOARD_WIDTH = 5;
+const GAME_BOARD_HEIGHT = 5;
+const NUM_WORDS_FIRST_TEAM = 9;
+const NUM_WORDS_SECOND_TEAM = 8;
+
+function _shuffleArray(array) {
+    array = array.slice();
+    for (var i = array.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+    return array;
+}
+
+export function createGameBoard(redGoesFirst) {
+  const numWords = GAME_BOARD_WIDTH * GAME_BOARD_HEIGHT;
+  let numRed = NUM_WORDS_SECOND_TEAM;
+  let numBlue = NUM_WORDS_SECOND_TEAM;
+  if (redGoesFirst) {
+    numRed = NUM_WORDS_FIRST_TEAM;
+  } else {
+    numBlue = NUM_WORDS_FIRST_TEAM;
+  }
+
+  const shuffledWords = _shuffleArray(WORD_LIST).slice(0, numWords);
+
+  const types = new Array(numWords);
+  types.fill(WORD_TYPES.NEUTRAL);
+  types.fill(WORD_TYPES.RED, 0, numRed);
+  types.fill(WORD_TYPES.BLUE, numRed, numRed + numBlue);
+  types[numRed + numBlue] = WORD_TYPES.ASSASSIN;
+  const shuffledTypes = _shuffleArray(types);
+
+  const gameBoard = [];
+  for (let i = 0; i < GAME_BOARD_HEIGHT; i++) {
+    const row = [];
+    for (let j = 0; j < GAME_BOARD_WIDTH; j++) {
+      row[j] = {
+        word: shuffledWords.pop(),
+        type: shuffledTypes.pop(),
+        isRevealed: false,
+      };
+    }
+    gameBoard[i] = row;
+  }
+  return gameBoard;
 }
 
 const WORD_LIST = [
