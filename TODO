@@ -5,5 +5,11 @@
     2) then choose to create new game or join existing
 - datastore validation rule to ensure logged in user can only add / remove themselves from player lists
 
+- should spymasters enter their clues and specify a number?
+  - just verbal to start?
+  - how does turn switch?
+    - if team's guess is wrong
+    - also need a button i guess to switch turns?
+
 player:
   - role: [UNSET, BLUE_SPY, RED_SPY, BLUE_SPYMASTER, RED_SPYMASTER]

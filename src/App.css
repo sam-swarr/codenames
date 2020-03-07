@@ -43,6 +43,21 @@
   width: 65px;
 }
 
+.Game-screen-root {
+  display: flex;
+}
+
+.Game-screen {
+  background: url('./images/background-pattern.png');
+  display: block;
+  min-height: 100vh;
+  min-width: 100vw;
+}
+
+.Game-info {
+  display: block;
+}
+
 
 .App-header {
   min-height: 100vh;

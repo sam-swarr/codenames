@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import CurrentTurnDisplay from './CurrentTurnDisplay';
+import EndTurnButton from './EndTurnButton';
 import GameBoard from './GameBoard';
 import PlayerList from './PlayerList';
 import {getCurrentUserID} from './UserAuth';
@@ -71,20 +73,41 @@ export default class GameScreen extends React.Component {
     });
   }
 
-  render() {
-    console.log("STATE: ");
-    console.log(this.state);
+  switchTurns() {
+    const gameRef = firebase.database().ref('games/' + this.props.gameID);
+    gameRef.update({
+      currentTurn: this.state.currentTurn === TEAMS.RED ? TEAMS.BLUE : TEAMS.RED,
+    });
+  }
+
+  _renderStartGameButton() {
+    if (!this._canStartGame()) {
+      return null;
+    }
     return (
       <div>
-        <div>
-          <p> Room Code: {this.state.roomCode} </p>
-          <PlayerList gameID={this.props.gameID} players={this.state.players} />
-        </div>
-        <div>
-          <button hidden={!this._canStartGame()} onClick={this.startGame.bind(this)}>Start Game</button>
-        </div>
-        <div>
-          <GameBoard playerRole={this.state.players[getCurrentUserID()].role} gameBoardState={this.state.gameBoardState} />
+        <button onClick={this.startGame.bind(this)}>Start Game</button>
+      </div>
+    );
+  }
+
+  render() {
+    const playerRole = this.state.players[getCurrentUserID()].role;
+    return (
+      <div className="Game-screen-root">
+        <div className="Game-screen">
+          <div className="Game-info">
+            <div>
+              <p> Room Code: {this.state.roomCode} </p>
+              <PlayerList gameID={this.props.gameID} players={this.state.players} />
+            </div>
+            <CurrentTurnDisplay currentTurn={this.state.currentTurn} />
+            <EndTurnButton currentTurn={this.state.currentTurn} playerRole={playerRole} onClick={this.switchTurns.bind(this)} />
+          </div>
+          {this._renderStartGameButton()}
+          <div>
+            <GameBoard playerRole={playerRole} gameBoardState={this.state.gameBoardState} />
+          </div>
         </div>
       </div>
     );

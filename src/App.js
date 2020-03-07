@@ -2,7 +2,6 @@ import React from 'react';
 import logo from './images/spylogo.png';
 import './App.css';
 
-import Button from './Button';
 import StartGameForm from './StartGameForm';
 import GameScreen from './GameScreen';
 import {loginUser} from './UserAuth';
