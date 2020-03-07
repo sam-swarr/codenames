@@ -10,10 +10,6 @@ export default class PlayerRoleButton extends React.Component {
     onClick: PropTypes.func,
   };
 
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <div>

@@ -1,9 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import GameBoard from './GameBoard';
 import PlayerList from './PlayerList';
 import {getCurrentUserID} from './UserAuth';
-import {ROLES} from './Utils';
+import {createGameBoard, ROLES, TEAMS} from './Utils';
 
 import * as firebase from "firebase/app";
 import "firebase/database";
@@ -60,8 +61,14 @@ export default class GameScreen extends React.Component {
   }
 
   startGame() {
+    const redGoesFirst = Math.random() < 0.5;
+    const gameBoardState = createGameBoard(redGoesFirst);
     const gameRef = firebase.database().ref('games/' + this.props.gameID);
-    gameRef.update({gameStarted: true});
+    gameRef.update({
+      currentTurn: redGoesFirst ? TEAMS.RED : TEAMS.BLUE,
+      gameBoardState: gameBoardState,
+      gameStarted: true,
+    });
   }
 
   render() {
@@ -77,7 +84,7 @@ export default class GameScreen extends React.Component {
           <button hidden={!this._canStartGame()} onClick={this.startGame.bind(this)}>Start Game</button>
         </div>
         <div>
-
+          <GameBoard gameBoardState={this.state.gameBoardState} />
         </div>
       </div>
     );

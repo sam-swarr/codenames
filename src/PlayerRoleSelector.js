@@ -14,10 +14,6 @@ export default class PlayerRoleSelector extends React.Component {
     players: PropTypes.object,
   };
 
-  constructor(props) {
-    super(props);
-  }
-
   onClick(roleType) {
     firebase.database().ref(
       "games/" + this.props.gameID + "/players/" + getCurrentUserID()

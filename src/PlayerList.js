@@ -10,13 +10,7 @@ export default class PlayerList extends React.Component {
     players: PropTypes.object,
   };
 
-  constructor(props) {
-    super(props);
-  }
-
   render() {
-    console.log("PLAYERS:");
-    console.log(this.props.players);
     const list = Object.keys(this.props.players).map(playerID => {
       return <PlayerListItem key={playerID} playerData={this.props.players[playerID]} />;
     });

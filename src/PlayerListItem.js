@@ -6,10 +6,6 @@ export default class PlayerListItem extends React.Component {
     playerData: PropTypes.object,
   };
 
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <div>

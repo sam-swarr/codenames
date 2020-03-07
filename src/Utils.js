@@ -1,4 +1,3 @@
-
 export const ROLES = {
   BLUE_SPYMASTER: 'BLUE_SPYMASTER',
   RED_SPYMASTER: 'RED_SPYMASTER',
@@ -6,7 +5,7 @@ export const ROLES = {
   RED_SPY: 'RED_SPY',
 }
 
-export const WORD_TYPES = {
+export const TEAMS = {
   BLUE: 'BLUE',
   RED: 'RED',
   NEUTRAL: 'NEUTRAL',
@@ -66,10 +65,10 @@ export function createGameBoard(redGoesFirst) {
   const shuffledWords = _shuffleArray(WORD_LIST).slice(0, numWords);
 
   const types = new Array(numWords);
-  types.fill(WORD_TYPES.NEUTRAL);
-  types.fill(WORD_TYPES.RED, 0, numRed);
-  types.fill(WORD_TYPES.BLUE, numRed, numRed + numBlue);
-  types[numRed + numBlue] = WORD_TYPES.ASSASSIN;
+  types.fill(TEAMS.NEUTRAL);
+  types.fill(TEAMS.RED, 0, numRed);
+  types.fill(TEAMS.BLUE, numRed, numRed + numBlue);
+  types[numRed + numBlue] = TEAMS.ASSASSIN;
   const shuffledTypes = _shuffleArray(types);
 
   const gameBoard = [];
