@@ -24,6 +24,10 @@
   margin: 5px;
 }
 
+.Board-word-wrapper.highlighted {
+  box-shadow: 0 0 3pt 2pt #ff00eb;
+}
+
 .Board-word-wrapper.Red-word {
   background-color: #f37878;
 }
@@ -45,6 +49,27 @@
 
 .Game-screen-root {
   display: flex;
+}
+
+.Submit-guess-button-wrapper {
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px;
+  width: 150px;
+}
+
+.Submit-guess-button {
+  background-color: #5B9E49;
+  border-radius: 5px;
+  border-width: medium;
+  border-style: outset;
+  color: black;
+  height: 40px;
+  width: 150px;
+}
+
+.Submit-guess-button.disabled {
+  background-color: grey;
 }
 
 .Game-screen {

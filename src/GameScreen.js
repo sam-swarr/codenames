@@ -80,6 +80,11 @@ export default class GameScreen extends React.Component {
     });
   }
 
+  submitGuess(row, column, role) {
+    console.log("("+row+", "+column+") " + role);
+    
+  }
+
   _renderStartGameButton() {
     if (!this._canStartGame()) {
       return null;
@@ -106,7 +111,11 @@ export default class GameScreen extends React.Component {
           </div>
           {this._renderStartGameButton()}
           <div>
-            <GameBoard playerRole={playerRole} gameBoardState={this.state.gameBoardState} />
+            <GameBoard 
+              currentTurn={this.state.currentTurn}
+              playerRole={playerRole}
+              gameBoardState={this.state.gameBoardState}
+              submitGuessCallback={this.submitGuess.bind(this)} />
           </div>
         </div>
       </div>
