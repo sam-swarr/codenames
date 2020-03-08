@@ -28,6 +28,14 @@
   box-shadow: 0 0 3pt 2pt #ff00eb;
 }
 
+.Board-word-wrapper.revealed {
+  color: #ff000000;
+}
+
+.Board-word-wrapper.revealed:active {
+  color: #000000;
+}
+
 .Board-word-wrapper.Red-word {
   background-color: #f37878;
 }

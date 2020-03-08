@@ -17,26 +17,29 @@ export default class GameBoardWord extends React.Component {
   }
 
   _getCSSClasses() {
-      const classes = ['Board-word-wrapper'];
-      if (this.props.highlighted) {
-          classes.push('highlighted');
+    const classes = ['Board-word-wrapper'];
+    if (this.props.highlighted) {
+      classes.push('highlighted');
+    }
+    if (this.props.wordState.isRevealed) {
+      classes.push('revealed');
+    }
+    if (isSpymaster(this.props.playerRole) || this.props.wordState.isRevealed) {
+      switch (this.props.wordState.team) {
+        case TEAMS.RED:
+          classes.push('Red-word');
+          break;
+        case TEAMS.BLUE:
+          classes.push('Blue-word');
+          break;
+        case TEAMS.ASSASSIN:
+          classes.push('Assassin-word');
+          break;
+        default:
+          break;
       }
-      if (isSpymaster(this.props.playerRole)) {
-          switch (this.props.wordState.team) {
-            case TEAMS.RED:
-                classes.push('Red-word');
-                break;
-            case TEAMS.BLUE:
-                classes.push('Blue-word');
-                break;
-            case TEAMS.ASSASSIN:
-                classes.push('Assassin-word');
-                break;
-            default:
-                break;
-          }
-      }
-      return classes;
+    }
+    return classes;
   }
 
   render() {

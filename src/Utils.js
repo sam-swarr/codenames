@@ -98,6 +98,27 @@ export function createGameBoard(redGoesFirst) {
   return gameBoard;
 }
 
+export function getSpyCount(gameBoardState) {
+  let blue = 0;
+  let red = 0;
+  for (let i = 0; i < gameBoardState.length; i++) {
+      for (let j = 0; j < gameBoardState[i].length; j++) {
+          const currWord = gameBoardState[i][j];
+          if (!currWord.isRevealed) {
+              if (currWord.team === TEAMS.BLUE) {
+                  blue++;
+              } else if (currWord.team === TEAMS.RED) {
+                  red++;
+              }
+          }
+      }
+  }
+  return {
+      blue: blue,
+      red: red,
+  };
+}
+
 const WORD_LIST = [
   "Hollywood",
   "Screen",

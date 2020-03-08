@@ -7,7 +7,7 @@ import GameBoard from './GameBoard';
 import PlayerList from './PlayerList';
 import SpyCountDisplay from './SpyCountDisplay';
 import {getCurrentUserID} from './UserAuth';
-import {createGameBoard, GAME_STATUS, ROLES, TEAMS} from './Utils';
+import {createGameBoard, getSpyCount, GAME_STATUS, ROLES, TEAMS} from './Utils';
 
 import * as firebase from "firebase/app";
 import "firebase/database";
@@ -86,13 +86,18 @@ export default class GameScreen extends React.Component {
     });
   }
 
+  gameWin(team) {
+    const gameRef = firebase.database().ref('games/' + this.props.gameID);
+    gameRef.update({
+      gameStatus: team === TEAMS.BLUE ? GAME_STATUS.BLUE_TEAM_WINS : GAME_STATUS.RED_TEAM_WINS, 
+    });
+  }
+
   submitGuess(row, column, role) {
-    console.log("("+row+", "+column+") " + role);
     const guessedWord = this.state.gameBoardState[row][column];
     if (guessedWord.isRevealed) {
       return;
     }
-    
 
     if (
       (guessedWord.team === TEAMS.BLUE && role === ROLES.RED_SPY)
@@ -101,14 +106,16 @@ export default class GameScreen extends React.Component {
     ) {
       this.switchTurns();
     } else if (guessedWord.team === TEAMS.ASSASSIN) {
-      const gameRef = firebase.database().ref('games/' + this.props.gameID);
-      // gameRef.update({
-      //   currentTurn: ,
-      // });
+      this.gameWin(role === ROLES.RED_SPY ? TEAMS.BLUE : TEAMS.RED);
     } else {
-      throw Error('UNHANDLED CASE WHEN GUESSING WORD: ' + JSON.stringify(guessedWord));
+      const counts = getSpyCount(this.state.gameBoardState);
+      if (
+        (role === ROLES.RED_SPY && counts.red === 1)
+        || (role === ROLES.BLUE_SPY && counts.blue === 1)
+      ) {
+        this.gameWin(role === ROLES.RED_SPY ? TEAMS.RED : TEAMS.BLUE);
+      }
     }
-
     const wordRef = firebase.database().ref('games/' + this.props.gameID + '/gameBoardState/' + row + '/' + column);
     wordRef.update({
       isRevealed: true,
