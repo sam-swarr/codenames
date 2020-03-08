@@ -6,7 +6,7 @@ import StartGameForm from './StartGameForm';
 import GameScreen from './GameScreen';
 import {loginUser} from './UserAuth';
 import {FIREBASE_CONFIG} from './FirebaseConfig.js';
-import {createRoomCode} from './Utils.js';
+import {createRoomCode, GAME_STATUS} from './Utils.js';
 
 import * as firebase from "firebase/app";
 import "firebase/database";
@@ -55,6 +55,7 @@ export default class App extends React.Component {
       name: name,
     };
     const newGameState = {
+      gameStatus: GAME_STATUS.NOT_STARTED,
       players: players,
       roomCode: roomCode,
     };

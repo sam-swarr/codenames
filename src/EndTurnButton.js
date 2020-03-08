@@ -1,23 +1,23 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import {ROLES, TEAMS} from './Utils';
+import {GAME_STATUS, ROLES} from './Utils';
 
-export default class CurrentTurnDisplay extends React.Component {
+export default class EndTurnButton extends React.Component {
   static propTypes = {
-    currentTurn: PropTypes.oneOf([TEAMS.RED, TEAMS.BLUE]),
+    gameStatus: PropTypes.oneOf(Object.values(GAME_STATUS)),
     playerRole: PropTypes.oneOf(Object.values(ROLES)),
     onClick: PropTypes.func,
   };
 
   render() {
     if (
-        (this.props.playerRole === ROLES.BLUE_SPYMASTER && this.props.currentTurn === TEAMS.BLUE)
-        || (this.props.playerRole === ROLES.RED_SPYMASTER && this.props.currentTurn === TEAMS.RED)
+        (this.props.playerRole === ROLES.BLUE_SPYMASTER && this.props.gameStatus === GAME_STATUS.BLUE_TURN)
+        || (this.props.playerRole === ROLES.RED_SPYMASTER && this.props.gameStatus === GAME_STATUS.RED_TURN)
     ) {
         return (
             <div>
-                <button onClick={this.props.onClick}>End Turn </button>
+                <button onClick={this.props.onClick}>End Turn</button>
             </div>
         );
     } else {

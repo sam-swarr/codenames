@@ -3,13 +3,13 @@ import PropTypes from "prop-types";
 
 import GameBoardWord from './GameBoardWord';
 import SubmitGuessButton from './SubmitGuessButton';
-import {ROLES, TEAMS} from './Utils';
+import {GAME_STATUS, ROLES} from './Utils';
 
 export default class GameBoard extends React.Component {
   static propTypes = {
     playerRole: PropTypes.oneOf(Object.values(ROLES)),
     gameBoardState: PropTypes.array,
-    currentTurn: PropTypes.oneOf([TEAMS.RED, TEAMS.BLUE]),
+    gameStatus: PropTypes.oneOf(Object.values(GAME_STATUS)),
     submitGuessCallback: PropTypes.func,
   };
 
@@ -66,8 +66,8 @@ export default class GameBoard extends React.Component {
         );
     }
     const isGuesser =
-        (this.props.playerRole === ROLES.RED_SPY && this.props.currentTurn === TEAMS.RED)
-        || (this.props.playerRole === ROLES.BLUE_SPY && this.props.currentTurn === TEAMS.BLUE);
+        (this.props.playerRole === ROLES.RED_SPY && this.props.gameStatus === GAME_STATUS.RED_TURN)
+        || (this.props.playerRole === ROLES.BLUE_SPY && this.props.gameStatus === GAME_STATUS.BLUE_TURN);
     return (
         <div>
             <div>

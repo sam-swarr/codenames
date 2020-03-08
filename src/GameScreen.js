@@ -1,13 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import CurrentTurnDisplay from './CurrentTurnDisplay';
+import GameStatusDisplay from './GameStatusDisplay';
 import EndTurnButton from './EndTurnButton';
 import GameBoard from './GameBoard';
 import PlayerList from './PlayerList';
 import SpyCountDisplay from './SpyCountDisplay';
 import {getCurrentUserID} from './UserAuth';
-import {createGameBoard, ROLES, TEAMS} from './Utils';
+import {createGameBoard, GAME_STATUS, ROLES, TEAMS} from './Utils';
 
 import * as firebase from "firebase/app";
 import "firebase/database";
@@ -56,7 +56,7 @@ export default class GameScreen extends React.Component {
   }
 
   _canStartGame() {
-    return !this.state.gameStarted
+    return this.state.gameStatus === GAME_STATUS.NOT_STARTED
       && this._roleTaken(ROLES.BLUE_SPYMASTER)
       && this._roleTaken(ROLES.RED_SPYMASTER)
       && this._roleTaken(ROLES.BLUE_SPY)
@@ -68,16 +68,21 @@ export default class GameScreen extends React.Component {
     const gameBoardState = createGameBoard(redGoesFirst);
     const gameRef = firebase.database().ref('games/' + this.props.gameID);
     gameRef.update({
-      currentTurn: redGoesFirst ? TEAMS.RED : TEAMS.BLUE,
       gameBoardState: gameBoardState,
-      gameStarted: true,
+      gameStatus: redGoesFirst ? GAME_STATUS.RED_TURN : GAME_STATUS.BLUE_TURN,
     });
   }
 
   switchTurns() {
+    if (
+      this.state.gameStatus !== GAME_STATUS.BLUE_TURN
+      && this.state.gameStatus !== GAME_STATUS.RED_TURN
+    ) {
+      throw Error('Unexpected call to switchTurns(). Current game status: ' + this.state.gameStatus);
+    }
     const gameRef = firebase.database().ref('games/' + this.props.gameID);
     gameRef.update({
-      currentTurn: this.state.currentTurn === TEAMS.RED ? TEAMS.BLUE : TEAMS.RED,
+      gameStatus: this.state.gameStatus === GAME_STATUS.RED_TURN ? GAME_STATUS.BLUE_TURN : GAME_STATUS.RED_TURN,
     });
   }
 
@@ -131,14 +136,14 @@ export default class GameScreen extends React.Component {
               <p> Room Code: {this.state.roomCode} </p>
               <PlayerList gameID={this.props.gameID} players={this.state.players} />
             </div>
-            <CurrentTurnDisplay currentTurn={this.state.currentTurn} />
+            <GameStatusDisplay gameStatus={this.state.gameStatus} />
             <SpyCountDisplay gameBoardState={this.state.gameBoardState} />
-            <EndTurnButton currentTurn={this.state.currentTurn} playerRole={playerRole} onClick={this.switchTurns.bind(this)} />
+            <EndTurnButton gameStatus={this.state.gameStatus} playerRole={playerRole} onClick={this.switchTurns.bind(this)} />
           </div>
           {this._renderStartGameButton()}
           <div>
             <GameBoard 
-              currentTurn={this.state.currentTurn}
+              gameStatus={this.state.gameStatus}
               playerRole={playerRole}
               gameBoardState={this.state.gameBoardState}
               submitGuessCallback={this.submitGuess.bind(this)} />

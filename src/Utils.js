@@ -16,6 +16,14 @@ export const TEAMS = {
   ASSASSIN: 'ASSASSIN',
 }
 
+export const GAME_STATUS = {
+  NOT_STARTED: 'NOT_STARTED',
+  BLUE_TURN: 'BLUE_TURN',
+  RED_TURN: 'RED_TURN',
+  BLUE_TEAM_WINS: 'BLUE_TEAM_WINS',
+  RED_TEAM_WINS: 'RED_TEAM_WINS',
+}
+
 export function getRoleLabel(role) {
   switch (role) {
     case ROLES.BLUE_SPYMASTER:
