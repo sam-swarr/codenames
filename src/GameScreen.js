@@ -5,6 +5,7 @@ import CurrentTurnDisplay from './CurrentTurnDisplay';
 import EndTurnButton from './EndTurnButton';
 import GameBoard from './GameBoard';
 import PlayerList from './PlayerList';
+import SpyCountDisplay from './SpyCountDisplay';
 import {getCurrentUserID} from './UserAuth';
 import {createGameBoard, ROLES, TEAMS} from './Utils';
 
@@ -83,6 +84,7 @@ export default class GameScreen extends React.Component {
   submitGuess(row, column, role) {
     console.log("("+row+", "+column+") " + role);
     
+
   }
 
   _renderStartGameButton() {
@@ -107,6 +109,7 @@ export default class GameScreen extends React.Component {
               <PlayerList gameID={this.props.gameID} players={this.state.players} />
             </div>
             <CurrentTurnDisplay currentTurn={this.state.currentTurn} />
+            <SpyCountDisplay gameBoardState={this.state.gameBoardState} />
             <EndTurnButton currentTurn={this.state.currentTurn} playerRole={playerRole} onClick={this.switchTurns.bind(this)} />
           </div>
           {this._renderStartGameButton()}
