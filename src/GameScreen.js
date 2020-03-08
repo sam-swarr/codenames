@@ -83,8 +83,31 @@ export default class GameScreen extends React.Component {
 
   submitGuess(row, column, role) {
     console.log("("+row+", "+column+") " + role);
+    const guessedWord = this.state.gameBoardState[row][column];
+    if (guessedWord.isRevealed) {
+      return;
+    }
     
 
+    if (
+      (guessedWord.team === TEAMS.BLUE && role === ROLES.RED_SPY)
+      || (guessedWord.team === TEAMS.RED && role === ROLES.BLUE_SPY)
+      || (guessedWord.team === TEAMS.NEUTRAL)
+    ) {
+      this.switchTurns();
+    } else if (guessedWord.team === TEAMS.ASSASSIN) {
+      const gameRef = firebase.database().ref('games/' + this.props.gameID);
+      // gameRef.update({
+      //   currentTurn: ,
+      // });
+    } else {
+      throw Error('UNHANDLED CASE WHEN GUESSING WORD: ' + JSON.stringify(guessedWord));
+    }
+
+    const wordRef = firebase.database().ref('games/' + this.props.gameID + '/gameBoardState/' + row + '/' + column);
+    wordRef.update({
+      isRevealed: true,
+    });
   }
 
   _renderStartGameButton() {
