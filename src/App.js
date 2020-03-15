@@ -25,6 +25,7 @@ export default class App extends React.Component {
     this.state = {
       gameID: null,
       initialGameState: {},
+      invalidRoomCode: false,
     };
   }
 
@@ -76,10 +77,15 @@ export default class App extends React.Component {
       .once('value');
     const gamesQueryResult = snapshot.val();
     if (!gamesQueryResult) {
-      console.log("NO ROOM FOUND");
+      this.setState({
+        invalidRoomCode: true,
+      });
+      setTimeout(() => {
+        this.setState({
+          invalidRoomCode: false,
+        });
+      }, 1000);
     } else {
-      console.log("FOUND ROOM");
-      console.log(gamesQueryResult);
       const gameID = Object.keys(gamesQueryResult)[0];
       const newPlayer = {}
       newPlayer[uid] = {
@@ -122,12 +128,13 @@ export default class App extends React.Component {
         <div className="App">
           <header className="App-header">
             <img src={logo} className="App-logo" alt="logo" />
-            <p>
+            <p className="App-title">
               Agent Appellations
             </p>
             <StartGameForm
               onCreateGameClick={this.createNewGame.bind(this)}
               onJoinGameClick={this.joinExistingGame.bind(this)}
+              shakeRoomCode={this.state.invalidRoomCode}
             />
           </header>
         </div>

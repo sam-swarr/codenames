@@ -1,9 +1,19 @@
 - display message if no room found with given code
+  - make sure its case / whitespace insensitive
 - require non-empty name
   - rather, make flow be:
     1) enter name first (is it possible to retrieve last name used with anonymous auth?)
     2) then choose to create new game or join existing
 - datastore validation rule to ensure logged in user can only add / remove themselves from player lists
+
+- cant re-reveal hidden word on mobile
+- purple highlight should drop after submitting
+
+- need feedback after a guess, maybe an animation?
+  - reveal to guesser and spymaster what the result was more clearly
+
+- slightly tint the background with the current team's turn?
+
 
 - should spymasters enter their clues and specify a number?
   - just verbal to start?
