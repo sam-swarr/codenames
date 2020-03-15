@@ -183,7 +183,6 @@
 }
 
 .Game-screen {
-  background: url('./images/background-pattern.png');
   display: block;
   min-height: 100vh;
   min-width: 100vw;
@@ -215,4 +214,29 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.Game-info {
+}
+
+.Player-info {
+  background: #c1c1c15c;
+  border-radius: 20px;
+  color: #eaeaea;
+  width: 50%;
+}
+
+.Player-list-wrapper {
+  width: 50%;
+}
+
+.Player-list-header {}
+
+.Room-code-display {
+  border-bottom: 5px solid #504e4e;
+  padding: 10px;
+}
+
+.Room-code-text {
+  font-weight: bold;
 }

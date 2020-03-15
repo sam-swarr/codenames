@@ -15,10 +15,7 @@ export default class PlayerList extends React.Component {
       return <PlayerListItem key={playerID} playerData={this.props.players[playerID]} />;
     });
     return (
-      <div>
-        <div>
-          <p>Players:</p>
-        </div>
+      <div className={"Player-list-wrapper"}>
         <div>
           {list}
         </div>

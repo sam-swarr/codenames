@@ -137,10 +137,10 @@ export default class GameScreen extends React.Component {
     const playerRole = this.state.players[getCurrentUserID()].role;
     return (
       <div className="Game-screen-root">
-        <div className="Game-screen">
+        <div className="Game-screen App">
           <div className="Game-info">
-            <div>
-              <p> Room Code: {this.state.roomCode} </p>
+            <div className="Player-info">
+              <p className="Room-code-display"> Room Code: <span className="Room-code-text">{this.state.roomCode}</span></p>
               <PlayerList gameID={this.props.gameID} players={this.state.players} />
             </div>
             <GameStatusDisplay gameStatus={this.state.gameStatus} />
