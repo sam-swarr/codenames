@@ -227,10 +227,22 @@
 }
 
 .Player-list-wrapper {
-  width: 50%;
+
 }
 
 .Player-list-header {}
+
+.Player-list-item-wrapper {
+  display: flex;
+}
+
+.Player-list-item-name {
+  flex: 1;
+}
+
+.Player-list-item-role {
+  width: 100px;
+}
 
 .Room-code-display {
   border-bottom: 5px solid #504e4e;
@@ -239,4 +251,20 @@
 
 .Room-code-text {
   font-weight: bold;
+}
+
+.Role-selector-dropdown-button .btn {
+    background: #c1c1c1;
+    border: 0 solid;
+    border-radius: 5px;
+    box-shadow: 4px 4px 2px 0px #000000;
+    font-family: 'Didact Gothic';
+}
+
+.Role-selector-dropdown-button .dropdown-menu {
+  display: none;
+}
+
+.Role-selector-dropdown-button .dropdown-menu.show {
+  display: block;
 }
