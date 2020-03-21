@@ -128,9 +128,11 @@ export default class App extends React.Component {
         <div className="App">
           <header className="App-header">
             <img src={logo} className="App-logo" alt="logo" />
-            <p className="App-title">
-              Agent Appellations
-            </p>
+            <div className="App-title">
+              <p>
+                Agent Appellations
+              </p>
+            </div>
             <StartGameForm
               onCreateGameClick={this.createNewGame.bind(this)}
               onJoinGameClick={this.joinExistingGame.bind(this)}

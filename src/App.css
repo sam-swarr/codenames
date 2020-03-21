@@ -17,7 +17,7 @@
 
 .App-title {
   color: white;
-  font-size: 30px;
+  font-size: 4vh;
   text-shadow: 2px 2px 5px black;
 }
 
@@ -65,12 +65,12 @@
 .Create-game-button {
   background:#c1c1c1;
   border: 0 solid;
-  border-radius: 5px;
+  border-radius: 1vh;
   box-shadow: 4px 4px 2px 0px #000000;
   font-family: 'Didact Gothic';
-  font-size: 14px;
-  height: 30px;
-  width: 80%;
+  font-size: 1.7vh;
+  height: 4vh;
+  width: 40vw;
 }
 
 .Game-screen-root {
@@ -78,19 +78,20 @@
 }
 
 .Join-room-wrapper {
-  margin-bottom: 15px;
+  margin-bottom: 3vh;
 }
 
 .Name-input {
   background: #c1c1c1;
   border: 0 solid;
-  border-radius: 5px;
+  border-radius: 1vh;
   box-shadow: none;
   color: #0e0e0e;
   font-family: 'Didact Gothic';
-  height: 20px;
+  font-size: 1.8vh;
+  height: 3vh;
   padding: 5px;
-  width: 100%;
+  width: 98%;
 }
 
 .Name-input-label {
@@ -154,10 +155,9 @@
 }
 
 .Start-game-form {
-  /*background-color: #032a475c; */
   border-radius: 10px;
   color: white;
-  padding: 20px;
+  font-size: 2.3vh;
   width: 50%;
 }
 
