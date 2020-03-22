@@ -33,24 +33,24 @@ export default class App extends React.Component {
     const uid = await loginUser();
     var roomCode = createRoomCode();
     const newGameRef = firebase.database().ref('games').push();
-    // onst players = {};
-    const players = {
-      test_player_1: {
-        name: 'bob',
-        role: 'RED_SPYMASTER',
-        uid: 'test_player_1',
-      },
-      test_player_2: {
-        name: 'joe',
-        role: 'RED_SPY',
-        uid: 'test_player_2',
-      },
-      test_player_3: {
-        name: 'fred',
-        role: 'BLUE_SPY',
-        uid: 'test_player_3',
-      }
-    };
+    const players = {};
+    // const players = {
+    //   test_player_1: {
+    //     name: 'bob',
+    //     role: 'RED_SPYMASTER',
+    //     uid: 'test_player_1',
+    //   },
+    //   test_player_2: {
+    //     name: 'joe',
+    //     role: 'RED_SPY',
+    //     uid: 'test_player_2',
+    //   },
+    //   test_player_3: {
+    //     name: 'fred',
+    //     role: 'BLUE_SPY',
+    //     uid: 'test_player_3',
+    //   }
+    // };
     players[uid] = {
       uid: uid,
       name: name,

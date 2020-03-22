@@ -197,6 +197,17 @@
   width: 40vw;
 }
 
+.End-turn-button {
+  background: #c5c1c5;
+  border: 0 solid;
+  border-radius: 5px;
+  box-shadow: 0.5vh 0.5vh 0.25vh 0 #000000;
+  font-family: 'Didact Gothic';
+  font-size: 2vh;
+  height: 6vh;
+  width: 40vw;
+}
+
 .Submit-guess-button.disabled {
   background-color: #c1c1c1;
   color: #828282;

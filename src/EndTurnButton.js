@@ -17,7 +17,7 @@ export default class EndTurnButton extends React.Component {
     ) {
         return (
             <div>
-                <button onClick={this.props.onClick}>End Turn</button>
+                <button className="End-turn-button" onClick={this.props.onClick}>End Turn</button>
             </div>
         );
     } else {

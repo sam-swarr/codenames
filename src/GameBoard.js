@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import EndTurnButton from './EndTurnButton';
 import GameBoardWord from './GameBoardWord';
 import SubmitGuessButton from './SubmitGuessButton';
 import {GAME_STATUS, ROLES} from './Utils';
@@ -11,6 +12,7 @@ export default class GameBoard extends React.Component {
     gameBoardState: PropTypes.array,
     gameStatus: PropTypes.oneOf(Object.values(GAME_STATUS)),
     submitGuessCallback: PropTypes.func,
+    switchTurns: PropTypes.func,
   };
 
   constructor(props) {
@@ -69,14 +71,25 @@ export default class GameBoard extends React.Component {
     const isGuesser =
         (this.props.playerRole === ROLES.RED_SPY && this.props.gameStatus === GAME_STATUS.RED_TURN)
         || (this.props.playerRole === ROLES.BLUE_SPY && this.props.gameStatus === GAME_STATUS.BLUE_TURN);
+
+
+    const buttonUI = isGuesser ?
+        (
+            <div className="Submit-guess-button-wrapper">
+                <SubmitGuessButton enabled={this.state.highlighted} onClick={this.onSubmitClick.bind(this)}/>
+            </div>
+        ) :
+        (
+            <div className="Submit-guess-button-wrapper">
+                <EndTurnButton gameStatus={this.props.gameStatus} playerRole={this.props.playerRole} onClick={this.props.switchTurns} />
+            </div>
+        );
     return (
         <div className="Game-board-wrapper">
             <div>
                 {rows}
             </div>
-            <div className="Submit-guess-button-wrapper" hidden={!isGuesser}>
-                <SubmitGuessButton enabled={isGuesser && this.state.highlighted} onClick={this.onSubmitClick.bind(this)}/>
-            </div>
+            {buttonUI}
         </div>
     );
   }

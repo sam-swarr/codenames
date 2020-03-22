@@ -97,6 +97,15 @@ export default class GameScreen extends React.Component {
       return;
     }
 
+    if (this.state.lastGuessedWord) {
+      const lastGuessedWordRef = firebase.database().ref(
+        'games/' + this.props.gameID + '/gameBoardState/' + this.state.lastGuessedWord[0] + '/' + this.state.lastGuessedWord[1],
+      );
+      lastGuessedWordRef.update({
+        lastGuessed: false,
+      });
+    }
+
     if (
       (guessedWord.team === TEAMS.BLUE && role === ROLES.RED_SPY)
       || (guessedWord.team === TEAMS.RED && role === ROLES.BLUE_SPY)
@@ -113,14 +122,6 @@ export default class GameScreen extends React.Component {
       ) {
         this.gameWin(role === ROLES.RED_SPY ? TEAMS.RED : TEAMS.BLUE);
       }
-    }
-    if (this.state.lastGuessedWord) {
-      const lastGuessedWordRef = firebase.database().ref(
-        'games/' + this.props.gameID + '/gameBoardState/' + this.state.lastGuessedWord[0] + '/' + this.state.lastGuessedWord[1],
-      );
-      lastGuessedWordRef.update({
-        lastGuessed: false,
-      });
     }
     const wordRef = firebase.database().ref('games/' + this.props.gameID + '/gameBoardState/' + row + '/' + column);
     wordRef.update({
@@ -158,7 +159,6 @@ export default class GameScreen extends React.Component {
               roomCode={this.state.roomCode}
               gameStatus={this.state.gameStatus}
               gameBoardState={this.state.gameBoardState}
-              switchTurns={this.switchTurns.bind(this)}
             />
 
           </div>
@@ -167,7 +167,9 @@ export default class GameScreen extends React.Component {
               gameStatus={this.state.gameStatus}
               playerRole={playerRole}
               gameBoardState={this.state.gameBoardState}
-              submitGuessCallback={this.submitGuess.bind(this)} />
+              submitGuessCallback={this.submitGuess.bind(this)}
+              switchTurns={this.switchTurns.bind(this)}
+            />
           </div>
         </div>
       </div>

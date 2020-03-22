@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 import {getSpyCount, GAME_STATUS, ROLES, TEAMS} from './Utils';
 
 import GameStatusDisplay from './GameStatusDisplay';
-import EndTurnButton from './EndTurnButton';
 import PlayerList from './PlayerList';
 import SpyCountDisplay from './SpyCountDisplay';
 
@@ -18,7 +17,6 @@ export default class GameInfo extends React.Component {
       playerRole: PropTypes.oneOf(Object.values(ROLES)),
       gameStatus: PropTypes.string,
       gameBoardState: PropTypes.array,
-      switchTurns: PropTypes.func,
   };
 
   constructor(props) {
@@ -80,7 +78,6 @@ export default class GameInfo extends React.Component {
           {blueSpyCount}
           <GameStatusDisplay gameStatus={this.props.gameStatus} />
           {redSpyCount}
-          <EndTurnButton gameStatus={this.props.gameStatus} playerRole={this.props.playerRole} onClick={this.props.switchTurns} />
           {this._renderStartGameButton()}
         </div>
       </div>
