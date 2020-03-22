@@ -41,6 +41,14 @@
   box-shadow: 0 0 0.2vh 0.2vh #ffffff;
 }
 
+.Board-word-wrapper.highlighted.last-guessed {
+  box-shadow: 0 0 0.2vh 0.2vh #ffffff;
+}
+
+.Board-word-wrapper.last-guessed {
+  box-shadow: 0 0 0.2vh 0.2vh #71e171;
+}
+
 .Board-word-wrapper.revealed {
   color: #00000000;
 }
@@ -174,22 +182,24 @@
 .Submit-guess-button-wrapper {
   margin-left: auto;
   margin-right: auto;
-  padding: 10px;
-  width: 150px;
+  padding: 2vh;
+  width: 40vw;
 }
 
 .Submit-guess-button {
-  background-color: #5B9E49;
+  background: #9cca8e;
+  border: 0 solid;
   border-radius: 5px;
-  border-width: medium;
-  border-style: outset;
-  color: black;
-  height: 40px;
-  width: 150px;
+  box-shadow: 0.5vh 0.5vh 0.25vh 0 #000000;
+  font-family: 'Didact Gothic';
+  font-size: 2vh;
+  height: 6vh;
+  width: 40vw;
 }
 
 .Submit-guess-button.disabled {
-  background-color: grey;
+  background-color: #c1c1c1;
+  color: #828282;
 }
 
 .Game-screen {

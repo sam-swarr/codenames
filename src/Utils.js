@@ -91,6 +91,7 @@ export function createGameBoard(redGoesFirst) {
         word: shuffledWords.pop(),
         team: shuffledTeamAssignments.pop(),
         isRevealed: false,
+        lastGuessed: false,
       };
     }
     gameBoard[i] = row;

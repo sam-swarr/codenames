@@ -18,6 +18,7 @@ export default class GameScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      lastGuessedWord: null,
       players: this.props.initialGameState.players,
     }
     this.removeUser = this.removeUserFromGame.bind(this);
@@ -113,9 +114,21 @@ export default class GameScreen extends React.Component {
         this.gameWin(role === ROLES.RED_SPY ? TEAMS.RED : TEAMS.BLUE);
       }
     }
+    if (this.state.lastGuessedWord) {
+      const lastGuessedWordRef = firebase.database().ref(
+        'games/' + this.props.gameID + '/gameBoardState/' + this.state.lastGuessedWord[0] + '/' + this.state.lastGuessedWord[1],
+      );
+      lastGuessedWordRef.update({
+        lastGuessed: false,
+      });
+    }
     const wordRef = firebase.database().ref('games/' + this.props.gameID + '/gameBoardState/' + row + '/' + column);
     wordRef.update({
+      lastGuessed: true,
       isRevealed: true,
+    });
+    this.setState({
+      lastGuessedWord: [row, column],
     });
   }
 

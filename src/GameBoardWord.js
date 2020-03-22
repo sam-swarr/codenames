@@ -9,6 +9,7 @@ export default class GameBoardWord extends React.Component {
     wordState: PropTypes.object,
     onClick: PropTypes.func,
     highlighted: PropTypes.bool,
+    lastGuessed: PropTypes.bool,
   };
 
   constructor(props) {
@@ -20,6 +21,9 @@ export default class GameBoardWord extends React.Component {
     const classes = ['Board-word-wrapper'];
     if (this.props.highlighted) {
       classes.push('highlighted');
+    }
+    if (this.props.lastGuessed) {
+      classes.push('last-guessed');
     }
     if (this.props.wordState.isRevealed) {
       classes.push('revealed');

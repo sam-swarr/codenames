@@ -56,6 +56,7 @@ export default class GameBoard extends React.Component {
                     playerRole={this.props.playerRole}
                     wordState={wordState}
                     highlighted={highlighted}
+                    lastGuessed={wordState.lastGuessed}
                     onClick={this.onWordClick.bind(this, row, col)} />
             );
         }
@@ -73,8 +74,8 @@ export default class GameBoard extends React.Component {
             <div>
                 {rows}
             </div>
-            <div className="Submit-guess-button-wrapper">
-                <SubmitGuessButton enabled={isGuesser} onClick={this.onSubmitClick.bind(this)}/>
+            <div className="Submit-guess-button-wrapper" hidden={!isGuesser}>
+                <SubmitGuessButton enabled={isGuesser && this.state.highlighted} onClick={this.onSubmitClick.bind(this)}/>
             </div>
         </div>
     );
