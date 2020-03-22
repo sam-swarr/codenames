@@ -35,7 +35,7 @@ export function getRoleLabel(role) {
     case ROLES.RED_SPY:
       return 'Red Spy';
     default:
-      throw Error('Unknown role constant: ' + role);
+      return 'Selecting Role...';
   }
 }
 

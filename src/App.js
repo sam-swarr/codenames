@@ -33,7 +33,7 @@ export default class App extends React.Component {
     const uid = await loginUser();
     var roomCode = createRoomCode();
     const newGameRef = firebase.database().ref('games').push();
-    // const players = {};
+    // onst players = {};
     const players = {
       test_player_1: {
         name: 'bob',

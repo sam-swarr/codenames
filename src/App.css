@@ -314,6 +314,10 @@
   width: 25vw;
 }
 
+.Player-role-selector-label-wrapper.no-role {
+  width: 40vw;
+}
+
 .Player-role-selector-label {
   display: flex;
   font-size: 1.8vh;

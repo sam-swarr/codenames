@@ -28,16 +28,25 @@ export default class PlayerRole extends React.Component {
   }
 
   render() {
+    const roleLogo = this.props.roleType ?
+        <div className="Role-selector-logo-wrapper">
+            <img src={this._getImgSource(this.props.roleType)} className="Role-selector-logo" alt="logo"/>
+        </div> :
+        null;
+
+    let labelWrapperClass = "Player-role-selector-label-wrapper";
+    if (this.props.roleType == null) {
+        labelWrapperClass += " no-role";
+    }
+
     return (
         <div className={"Player-role-selector-button-contents-wrapper"}>
-            <div className={"Player-role-selector-label-wrapper"}>
+            <div className={labelWrapperClass}>
                 <div className={"Player-role-selector-label"}>
                 <p>{getRoleLabel(this.props.roleType)}</p>
                 </div>
             </div>
-            <div className="Role-selector-logo-wrapper">
-                <img src={this._getImgSource(this.props.roleType)} className="Role-selector-logo" alt="logo"/>
-            </div>
+            {roleLogo}
         </div>
     );
   }
