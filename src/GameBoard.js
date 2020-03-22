@@ -69,7 +69,7 @@ export default class GameBoard extends React.Component {
         (this.props.playerRole === ROLES.RED_SPY && this.props.gameStatus === GAME_STATUS.RED_TURN)
         || (this.props.playerRole === ROLES.BLUE_SPY && this.props.gameStatus === GAME_STATUS.BLUE_TURN);
     return (
-        <div>
+        <div className="Game-board-wrapper">
             <div>
                 {rows}
             </div>

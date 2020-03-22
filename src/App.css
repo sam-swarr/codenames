@@ -21,45 +21,55 @@
   text-shadow: 0.5vh 0.5vh 0.5vh 0 #000000;
 }
 
+.Game-board-wrapper {
+  margin-top: 2vh;
+}
+
 .Board-row {
   display: flex;
 }
 
 .Board-word-wrapper {
-  background-color: #e1e2b0;
+  background-color: #e1e2b0e0;
   border-radius: 0.5vh;
+  box-shadow: 0.5vh 0.5vh 0.25vh 0 #00000047;
   margin: 0.5vh;
+  width: 24vw;
 }
 
 .Board-word-wrapper.highlighted {
-  box-shadow: 0 0 3pt 2pt #ff00eb;
+  box-shadow: 0 0 0.2vh 0.2vh #ffffff;
 }
 
 .Board-word-wrapper.revealed {
-  color: #ff000000;
+  color: #00000000;
 }
 
-.Board-word-wrapper.revealed:active {
+.Board-word-wrapper.revealed:hover {
   color: #000000;
+  text-decoration: line-through;
 }
 
 .Board-word-wrapper.Red-word {
-  background-color: #f37878;
+  background-color: #e67d7de0;
 }
 
 .Board-word-wrapper.Blue-word {
-  background-color: #8c8cb9;
+  background-color: #9494bde0;
 }
 
 .Board-word-wrapper.Assassin-word {
-  background-color: #333333;
+  background-color: #000000ab;
   color: #e2e2e2;
 }
 
+.Board-word-text-wrapper {
+
+}
+
 .Board-word {
-  font-size: 2vh;
+  font-size: 1.8vh;
   text-align: center;
-  width: 65px;
 }
 
 .Create-game-button {

@@ -45,7 +45,9 @@ export default class GameBoardWord extends React.Component {
   render() {
     return (
       <div className={this._getCSSClasses().join(' ')} onClick={this.props.onClick}>
-        <p className="Board-word"> {this.props.wordState.word} </p>
+        <div className={'Board-word-text-wrapper'}>
+          <p className="Board-word"> {this.props.wordState.word} </p>
+        </div>
       </div>
     );
   }

@@ -48,8 +48,8 @@ export function createRoomCode() {
   return result;
 }
 
-const GAME_BOARD_WIDTH = 5;
-const GAME_BOARD_HEIGHT = 5;
+const GAME_BOARD_WIDTH = 4;
+const GAME_BOARD_HEIGHT = 6;
 const NUM_WORDS_FIRST_TEAM = 9;
 const NUM_WORDS_SECOND_TEAM = 8;
 
