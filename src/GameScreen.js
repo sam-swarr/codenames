@@ -1,11 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import GameStatusDisplay from './GameStatusDisplay';
-import EndTurnButton from './EndTurnButton';
 import GameBoard from './GameBoard';
-import PlayerList from './PlayerList';
-import SpyCountDisplay from './SpyCountDisplay';
+import GameInfo from './GameInfo';
 import {getCurrentUserID} from './UserAuth';
 import {createGameBoard, getSpyCount, GAME_STATUS, ROLES, TEAMS} from './Utils';
 
@@ -138,16 +135,20 @@ export default class GameScreen extends React.Component {
     return (
       <div className="Game-screen-root">
         <div className="Game-screen App">
-          <div className="Game-info">
-            <div className="Player-info">
-              <p className="Room-code-display"> Room Code: <span className="Room-code-text">{this.state.roomCode}</span></p>
-              <PlayerList gameID={this.props.gameID} players={this.state.players} />
-            </div>
-            <GameStatusDisplay gameStatus={this.state.gameStatus} />
-            <SpyCountDisplay gameBoardState={this.state.gameBoardState} />
-            <EndTurnButton gameStatus={this.state.gameStatus} playerRole={playerRole} onClick={this.switchTurns.bind(this)} />
+          <div>
+            <GameInfo
+              canStartGame={this._canStartGame()}
+              startGame={this.startGame.bind(this)}
+              players={this.state.players}
+              playerRole={playerRole}
+              gameID={this.props.gameID}
+              roomCode={this.state.roomCode}
+              gameStatus={this.state.gameStatus}
+              gameBoardState={this.state.gameBoardState}
+              switchTurns={this.switchTurns.bind(this)}
+            />
+
           </div>
-          {this._renderStartGameButton()}
           <div>
             <GameBoard 
               gameStatus={this.state.gameStatus}
