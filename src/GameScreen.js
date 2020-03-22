@@ -18,9 +18,9 @@ export default class GameScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      lastGuessedWord: null,
       players: this.props.initialGameState.players,
     }
+    this.lastGuessedWord = null;
     this.removeUser = this.removeUserFromGame.bind(this);
   }
 
@@ -97,9 +97,9 @@ export default class GameScreen extends React.Component {
       return;
     }
 
-    if (this.state.lastGuessedWord) {
+    if (this.lastGuessedWord) {
       const lastGuessedWordRef = firebase.database().ref(
-        'games/' + this.props.gameID + '/gameBoardState/' + this.state.lastGuessedWord[0] + '/' + this.state.lastGuessedWord[1],
+        'games/' + this.props.gameID + '/gameBoardState/' + this.lastGuessedWord[0] + '/' + this.lastGuessedWord[1],
       );
       lastGuessedWordRef.update({
         lastGuessed: false,
@@ -128,9 +128,7 @@ export default class GameScreen extends React.Component {
       lastGuessed: true,
       isRevealed: true,
     });
-    this.setState({
-      lastGuessedWord: [row, column],
-    });
+    this.lastGuessedWord = [row, column];
   }
 
   _renderStartGameButton() {
