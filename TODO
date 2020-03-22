@@ -1,8 +1,3 @@
-Where I left off:
-  - working on drop down role selector
-    - menu can toggle now; need to style dropdown items and hook them up to callbacks
-  - after you select role, use image icons to denote role rather than text
-
 - display message if no room found with given code
   - make sure its case / whitespace insensitive
 - require non-empty name
@@ -19,6 +14,7 @@ Where I left off:
 
 - slightly tint the background with the current team's turn?
 
+- be able to re-select a role after initial selection
 
 - should spymasters enter their clues and specify a number?
   - just verbal to start?

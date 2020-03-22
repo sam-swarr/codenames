@@ -18,7 +18,7 @@
 .App-title {
   color: white;
   font-size: 4vh;
-  text-shadow: 2px 2px 5px black;
+  text-shadow: 0.5vh 0.5vh 0.5vh 0 #000000;
 }
 
 .Board-row {
@@ -27,8 +27,8 @@
 
 .Board-word-wrapper {
   background-color: #e1e2b0;
-  border-radius: 5px;
-  margin: 5px;
+  border-radius: 0.5vh;
+  margin: 0.5vh;
 }
 
 .Board-word-wrapper.highlighted {
@@ -57,7 +57,7 @@
 }
 
 .Board-word {
-  font-size: 10px;
+  font-size: 2vh;
   text-align: center;
   width: 65px;
 }
@@ -66,7 +66,7 @@
   background:#c1c1c1;
   border: 0 solid;
   border-radius: 1vh;
-  box-shadow: 4px 4px 2px 0px #000000;
+  box-shadow: 0.5vh 0.5vh 0.25vh 0 #000000;
   font-family: 'Didact Gothic';
   font-size: 1.7vh;
   height: 4vh;
@@ -216,7 +216,77 @@
   }
 }
 
-.Game-info {
+.Spy-count-wrapper {
+  height: 6vh;
+  padding: 0 2vh;
+  position: relative;
+  width: 20vw;
+}
+
+.Spy-count-number {
+  font-weight: bold;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  text-shadow: 0.2vh 0.2vh black;
+  transform: translate(-50%, -50%);
+}
+
+.Spy-count-img {
+  height: 5vh;
+  margin-top: 0.5vh
+}
+
+.Game-status-wrapper {
+  background: #c1c1c15c;
+  border-radius: 0 0 2vh 2vh;
+  border-top: 0.5vh solid #504e4e;
+  color: #eaeaea;
+  display: inline-flex;
+  height: 6vh;
+  width: 95%;
+}
+
+.Game-status-wrapper.red-turn {
+  background: #e67d7d5c;
+}
+
+.Game-status-wrapper.blue-turn {
+  background: #7e7cf75c;
+}
+
+
+.Game-status-wrapper.player-info-hidden {
+  border-top: 0;
+}
+
+.Game-status-display {
+  display: flex;
+  font-size: 2.2vh;
+  height: 4vh;
+  padding-top: 1vh;
+  width: inherit;
+}
+
+.Game-status-display p {
+  margin: auto;
+}
+
+.Start-game-button-wrapper {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.Start-game-button {
+  background: #c1c1c1;
+  border: 0 solid;
+  border-radius: 5px;
+  box-shadow: 0.5vh 0.5vh 0.25vh 0 #000000;
+  font-family: 'Didact Gothic';
+  font-size: 2vh;
+  height: 4.5vh;
+  margin-top: 0.7vh;
+  width: 25vw;
 }
 
 .Player-info {
@@ -243,7 +313,7 @@
 }
 
 .Player-list-item-name {
-  border-right: 5px solid #504e4e;
+  border-right: 0.5vh solid #504e4e;
   flex: 1;
   width: 50%
 }
@@ -260,18 +330,18 @@
   background-color: #c1c1c1;
   border: 0 solid;
   border-radius: 4vw;
-  box-shadow: 4px 4px 2px 0px #000000;
+  box-shadow: 0.5vh 0.5vh 0.25vh 0 #000000;
   height: 8vh;
   padding: 0;
   width: 40vw;
 }
 
 .Room-code-display {
-  border-bottom: 5px solid #504e4e;
+  border-bottom: 0.5vh solid #504e4e;
   font-size: 2.2vh;
   height: 3vh;
   margin: 0;
-  padding: 10px;
+  padding: 1.5vh;
 }
 
 .Room-code-text {
@@ -286,7 +356,7 @@
     background: #c1c1c1;
     border: 0 solid;
     border-radius: 5px;
-    box-shadow: 4px 4px 2px 0px #000000;
+    box-shadow: 0.5vh 0.5vh 0.25vh 0 #000000;
     font-family: 'Didact Gothic';
     font-size: 2vh;
     height: 5vh;

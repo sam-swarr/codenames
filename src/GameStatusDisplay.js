@@ -33,7 +33,7 @@ export default class GameStatusDisplay extends React.Component {
     }
 
     return (
-      <div>
+      <div className={'Game-status-display'}>
         <p>{text}</p>
       </div>
     );
