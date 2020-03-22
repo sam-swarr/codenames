@@ -223,34 +223,63 @@
   background: #c1c1c15c;
   border-radius: 20px;
   color: #eaeaea;
-  width: 50%;
+  margin-left: 2.5%;
+  width: 95%;
 }
 
 .Player-list-wrapper {
-
+  font-size: 2vh;
 }
 
 .Player-list-header {}
 
 .Player-list-item-wrapper {
   display: flex;
+  height: 6.5vh;
+}
+
+.Player-list-item-wrapper.darkrow {
+  background-color: #69696991;
 }
 
 .Player-list-item-name {
+  border-right: 5px solid #504e4e;
   flex: 1;
+  width: 50%
 }
 
 .Player-list-item-role {
-  width: 100px;
+  width: 50%;
+}
+
+.Player-role-button-wrapper {
+  padding-top: 0.5vh;
+}
+
+.Player-role-button {
+  background-color: #c1c1c1;
+  border: 0 solid;
+  border-radius: 4vw;
+  box-shadow: 4px 4px 2px 0px #000000;
+  height: 8vh;
+  padding: 0;
+  width: 40vw;
 }
 
 .Room-code-display {
   border-bottom: 5px solid #504e4e;
+  font-size: 2.2vh;
+  height: 3vh;
+  margin: 0;
   padding: 10px;
 }
 
 .Room-code-text {
   font-weight: bold;
+}
+
+.Role-selector-dropdown-button {
+  margin-top: 0.5vh;
 }
 
 .Role-selector-dropdown-button .btn {
@@ -259,12 +288,73 @@
     border-radius: 5px;
     box-shadow: 4px 4px 2px 0px #000000;
     font-family: 'Didact Gothic';
+    font-size: 2vh;
+    height: 5vh;
+    width: 25vw;
 }
 
 .Role-selector-dropdown-button .dropdown-menu {
   display: none;
+  margin-left: -7.5vw;
+  width: 40vw;
 }
 
 .Role-selector-dropdown-button .dropdown-menu.show {
   display: block;
+}
+
+.Player-role-selector-button-contents-wrapper {
+  display: inline-flex;
+  height: 8vh;
+}
+
+.Player-role-selector-label-wrapper {
+  display: inline-block;
+  height: 8vh;
+  width: 25vw;
+}
+
+.Player-role-selector-label {
+  display: flex;
+  font-size: 1.8vh;
+  height: 6vh;
+  margin-top: 1vh;
+}
+
+.Player-role-selector-label p {
+  margin: auto;
+  text-align: center;
+}
+
+.Role-selector-logo-wrapper {
+  display: inline-block;
+  height: 8vh;
+  width: 15vw;
+}
+
+.Role-selector-logo {
+  height: 5vh;
+  margin-top: 1.5vh;
+}
+
+.Player-list-wrapper .Player-role-selector-label {
+  height: 6.5vh;
+  margin: 0;
+}
+
+.Player-list-wrapper .Player-role-selector-button-contents-wrapper {
+  height: 6.5vh;
+}
+
+.Player-list-wrapper .Player-role-selector-label-wrapper {
+  height: 6.5vh;
+}
+
+.Player-list-wrapper .Role-selector-logo-wrapper {
+  height: 6.5vh;
+}
+
+.Player-list-wrapper .Role-selector-logo {
+  height: 5vh;
+  margin-top: 0.75vh;
 }

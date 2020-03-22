@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import {getRoleLabel} from './Utils';
+import PlayerRole from './PlayerRole';
 
 export default class PlayerRoleButton extends React.Component {
   static propTypes = {
@@ -12,12 +12,10 @@ export default class PlayerRoleButton extends React.Component {
 
   render() {
     return (
-      <div>
-        <div>
-          <button onClick={this.props.onClick} disabled={this.props.disabled}>
-            {getRoleLabel(this.props.roleType)}
-          </button>
-        </div>
+      <div className="Player-role-button-wrapper">
+        <button className="Player-role-button" onClick={this.props.onClick} disabled={this.props.disabled}>
+          <PlayerRole roleType={this.props.roleType} />
+        </button>
       </div>
     );
   }

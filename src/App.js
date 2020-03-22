@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from './images/spylogo.png';
+import logo from './images/spylogo-blue-red.png';
 import './App.css';
 
 import StartGameForm from './StartGameForm';

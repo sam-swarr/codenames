@@ -1,3 +1,4 @@
+import PlayerRole from './PlayerRole';
 import PlayerRoleSelector from './PlayerRoleSelector';
 import {getCurrentUserID} from './UserAuth'
 
@@ -7,6 +8,7 @@ import PropTypes from "prop-types";
 export default class PlayerListItem extends React.Component {
   static propTypes = {
     allPlayers: PropTypes.object,
+    darkCSS: PropTypes.bool,
     gameID: PropTypes.string,
     playerData: PropTypes.object,
   };
@@ -17,11 +19,16 @@ export default class PlayerListItem extends React.Component {
       && !this.props.playerData.role;
     
     const roleUI = showRoleSelector ?
-        <PlayerRoleSelector gameID={this.props.gameID} players={this.props.allPlayers} /> :
-        <p>{this.props.playerData.role}</p>;
+        <PlayerRoleSelector gameID={this.props.gameID} players={this.props.allPlayers}/> :
+        <PlayerRole roleType={this.props.playerData.role}/>;
+
+    let wrapperClass = "Player-list-item-wrapper";
+    if (this.props.darkCSS) {
+      wrapperClass += " darkrow";
+    }
 
     return (
-      <div className="Player-list-item-wrapper">
+      <div className={wrapperClass}>
         <div className="Player-list-item-name">
           <p>{this.props.playerData.name}</p>
         </div>
