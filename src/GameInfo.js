@@ -8,8 +8,6 @@ import EndTurnButton from './EndTurnButton';
 import PlayerList from './PlayerList';
 import SpyCountDisplay from './SpyCountDisplay';
 
-import DropdownButton from 'react-bootstrap/DropdownButton';
-
 export default class GameInfo extends React.Component {
   static propTypes = {
       canStartGame: PropTypes.bool,
@@ -23,6 +21,13 @@ export default class GameInfo extends React.Component {
       switchTurns: PropTypes.func,
   };
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      expanded: true,
+    }
+  }
+
   _renderStartGameButton() {
     if (!this.props.canStartGame) {
       return null;
@@ -34,12 +39,20 @@ export default class GameInfo extends React.Component {
     );
   }
 
+  _onTopClick() {
+    this.setState({
+      expanded: !this.state.expanded,
+    });
+  }
+
   render() {
     return (
       <div className="Game-info">
         <div className="Player-info">
-          <p className="Room-code-display"> Room Code: <span className="Room-code-text">{this.props.roomCode}</span></p>
-          <PlayerList gameID={this.props.gameID} players={this.props.players} />
+          <p className="Room-code-display" onClick={this._onTopClick.bind(this)}> Room Code: <span className="Room-code-text">{this.props.roomCode}</span></p>
+          <div hidden={!this.state.expanded}>
+            <PlayerList  gameID={this.props.gameID} players={this.props.players} />
+          </div>
         </div>
         <GameStatusDisplay gameStatus={this.props.gameStatus} />
         <SpyCountDisplay gameBoardState={this.props.gameBoardState} />
