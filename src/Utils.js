@@ -1,5 +1,3 @@
-import {WORDS} from './words/words.js';
-
 export const ROLES = {
   BLUE_SPYMASTER: 'BLUE_SPYMASTER',
   RED_SPYMASTER: 'RED_SPYMASTER',
@@ -66,7 +64,7 @@ function _shuffleArray(array) {
     return array;
 }
 
-export function createGameBoard(redGoesFirst) {
+export function createGameBoard(wordList, redGoesFirst) {
   const numWords = GAME_BOARD_WIDTH * GAME_BOARD_HEIGHT;
   let numRed = NUM_WORDS_SECOND_TEAM;
   let numBlue = NUM_WORDS_SECOND_TEAM;
@@ -76,7 +74,7 @@ export function createGameBoard(redGoesFirst) {
     numBlue = NUM_WORDS_FIRST_TEAM;
   }
 
-  const shuffledWords = _shuffleArray(WORDS).slice(0, numWords);
+  const shuffledWords = _shuffleArray(wordList).slice(0, numWords);
 
   const teamAssignments = new Array(numWords);
   teamAssignments.fill(TEAMS.NEUTRAL);

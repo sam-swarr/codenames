@@ -6,6 +6,9 @@ import GameInfo from './GameInfo';
 import {getCurrentUserID} from './UserAuth';
 import {createGameBoard, getSpyCount, GAME_STATUS, ROLES, TEAMS} from './Utils';
 
+import {WORDS} from './words/words.js';
+import {AMY_WORDS} from './words/amy_words.js';
+
 import * as firebase from "firebase/app";
 import "firebase/database";
 
@@ -62,8 +65,13 @@ export default class GameScreen extends React.Component {
   }
 
   startGame() {
+    const amyEasterEgg = Object.values(this.state.players).some((playerData) => {
+      return playerData.name && playerData.name === 'butthole woman';
+    });
+    const wordsToUse = amyEasterEgg ? AMY_WORDS : WORDS;
+
     const redGoesFirst = Math.random() < 0.5;
-    const gameBoardState = createGameBoard(redGoesFirst);
+    const gameBoardState = createGameBoard(wordsToUse, redGoesFirst);
     const gameRef = firebase.database().ref('games/' + this.props.gameID);
     gameRef.update({
       gameBoardState: gameBoardState,
