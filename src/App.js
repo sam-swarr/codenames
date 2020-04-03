@@ -138,6 +138,9 @@ export default class App extends React.Component {
               onJoinGameClick={this.joinExistingGame.bind(this)}
               shakeRoomCode={this.state.invalidRoomCode}
             />
+            <div className="Credit-line">
+              Built by Sam Swarr
+            </div>
           </header>
         </div>
       );

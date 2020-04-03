@@ -91,6 +91,15 @@
   width: 40vw;
 }
 
+.Credit-line {
+  bottom: 1vh;
+  color: #c7c7c7;
+  font-size: 1.3vh;
+  margin-top: 20px;
+  position: fixed;
+  right: 2vw;
+}
+
 .Game-screen-root {
   display: flex;
 }
