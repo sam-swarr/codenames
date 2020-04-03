@@ -1,4 +1,4 @@
-[
+export const WORDS = [
   "Ace",
   "Africa",
   "Agent",
@@ -798,5 +798,5 @@
   "Worm",
   "Yard",
   "Yellowstone",
-  "Zombie"
-]
+  "Zombie",
+];

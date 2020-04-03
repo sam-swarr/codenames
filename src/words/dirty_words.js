@@ -1,4 +1,4 @@
-[
+export const DIRTY_WORDS = [
   "Acid",
   "Alcohol",
   "Animal",
@@ -388,5 +388,5 @@
   "White",
   "Wiener",
   "Wine",
-  "Wood"
-]
+  "Wood",
+];
