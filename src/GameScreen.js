@@ -4,7 +4,14 @@ import PropTypes from "prop-types";
 import GameBoard from './GameBoard';
 import GameInfo from './GameInfo';
 import {getCurrentUserID} from './UserAuth';
-import {createGameBoard, getSpyCount, GAME_STATUS, ROLES, TEAMS} from './Utils';
+import {
+  createGameBoard,
+  findLastGuessedWord,
+  getSpyCount,
+  GAME_STATUS,
+  ROLES,
+  TEAMS,
+} from './Utils';
 
 import {WORDS} from './words/words.js';
 import {AMY_WORDS} from './words/amy_words.js';
@@ -24,7 +31,6 @@ export default class GameScreen extends React.Component {
     this.state = {
       players: this.props.initialGameState.players,
     }
-    this.lastGuessedWord = null;
     this.removeUser = this.removeUserFromGame.bind(this);
   }
 
@@ -72,7 +78,7 @@ export default class GameScreen extends React.Component {
     const ramisEasterEgg = Object.values(this.state.players).some((playerData) => {
       return playerData.name && playerData.name === 'Minoru Yamasaki';
     });
-    
+
     let wordsToUse = WORDS;
     if (ramisEasterEgg) {
       wordsToUse = RAMIS_WORDS;
@@ -105,7 +111,7 @@ export default class GameScreen extends React.Component {
   gameWin(team) {
     const gameRef = firebase.database().ref('games/' + this.props.gameID);
     gameRef.update({
-      gameStatus: team === TEAMS.BLUE ? GAME_STATUS.BLUE_TEAM_WINS : GAME_STATUS.RED_TEAM_WINS, 
+      gameStatus: team === TEAMS.BLUE ? GAME_STATUS.BLUE_TEAM_WINS : GAME_STATUS.RED_TEAM_WINS,
     });
   }
 
@@ -115,38 +121,37 @@ export default class GameScreen extends React.Component {
       return;
     }
 
-    if (this.lastGuessedWord) {
-      const lastGuessedWordRef = firebase.database().ref(
-        'games/' + this.props.gameID + '/gameBoardState/' + this.lastGuessedWord[0] + '/' + this.lastGuessedWord[1],
-      );
-      lastGuessedWordRef.update({
+    if (guessedWord.team === TEAMS.ASSASSIN) {
+      this.gameWin(role === ROLES.RED_SPY ? TEAMS.BLUE : TEAMS.RED);
+    } else if (guessedWord.team === TEAMS.NEUTRAL) {
+      this.switchTurns();
+    } else {
+      const counts = getSpyCount(this.state.gameBoardState);
+      if (guessedWord.team === TEAMS.BLUE) {
+        if (counts.blue === 1) {
+          this.gameWin(TEAMS.BLUE);
+        } else if (role === ROLES.RED_SPY) {
+          this.switchTurns();
+        }
+      } else if (guessedWord.team === TEAMS.RED) {
+        if (counts.red === 1) {
+          this.gameWin(TEAMS.RED);
+        } else if (role === ROLES.BLUE_SPY) {
+          this.switchTurns();
+        }
+      }
+    }
+
+    const lastGuessedWord = findLastGuessedWord(this.state.gameBoardState);
+    if (lastGuessedWord != null) {
+      firebase.database().ref('games/' + this.props.gameID + '/gameBoardState/' + lastGuessedWord[0] + '/' + lastGuessedWord[1]).update({
         lastGuessed: false,
       });
     }
-
-    if (
-      (guessedWord.team === TEAMS.BLUE && role === ROLES.RED_SPY)
-      || (guessedWord.team === TEAMS.RED && role === ROLES.BLUE_SPY)
-      || (guessedWord.team === TEAMS.NEUTRAL)
-    ) {
-      this.switchTurns();
-    } else if (guessedWord.team === TEAMS.ASSASSIN) {
-      this.gameWin(role === ROLES.RED_SPY ? TEAMS.BLUE : TEAMS.RED);
-    } else {
-      const counts = getSpyCount(this.state.gameBoardState);
-      if (
-        (role === ROLES.RED_SPY && counts.red === 1)
-        || (role === ROLES.BLUE_SPY && counts.blue === 1)
-      ) {
-        this.gameWin(role === ROLES.RED_SPY ? TEAMS.RED : TEAMS.BLUE);
-      }
-    }
-    const wordRef = firebase.database().ref('games/' + this.props.gameID + '/gameBoardState/' + row + '/' + column);
-    wordRef.update({
+    firebase.database().ref('games/' + this.props.gameID + '/gameBoardState/' + row + '/' + column).update({
       lastGuessed: true,
       isRevealed: true,
     });
-    this.lastGuessedWord = [row, column];
   }
 
   _renderStartGameButton() {
@@ -179,7 +184,7 @@ export default class GameScreen extends React.Component {
 
           </div>
           <div>
-            <GameBoard 
+            <GameBoard
               gameStatus={this.state.gameStatus}
               playerRole={playerRole}
               gameBoardState={this.state.gameBoardState}

@@ -53,8 +53,8 @@ export default class GameBoard extends React.Component {
                 && this.state.highlighted[0] === row
                 && this.state.highlighted[1] === col;
             wordsInRow.push(
-                <GameBoardWord 
-                    key={wordState.word}
+                <GameBoardWord
+                    key={col}
                     playerRole={this.props.playerRole}
                     wordState={wordState}
                     highlighted={highlighted}
@@ -76,7 +76,7 @@ export default class GameBoard extends React.Component {
     const buttonUI = isGuesser ?
         (
             <div className="Submit-guess-button-wrapper">
-                <SubmitGuessButton enabled={this.state.highlighted} onClick={this.onSubmitClick.bind(this)}/>
+                <SubmitGuessButton enabled={!!this.state.highlighted} onClick={this.onSubmitClick.bind(this)}/>
             </div>
         ) :
         (

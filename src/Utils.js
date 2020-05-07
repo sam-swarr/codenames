@@ -6,7 +6,7 @@ export const ROLES = {
 }
 
 export function isSpymaster(role) {
-  return role === ROLES.BLUE_SPYMASTER || role === ROLES.RED_SPYMASTER; 
+  return role === ROLES.BLUE_SPYMASTER || role === ROLES.RED_SPYMASTER;
 }
 
 export const TEAMS = {
@@ -62,6 +62,17 @@ function _shuffleArray(array) {
         array[j] = temp;
     }
     return array;
+}
+
+export function findLastGuessedWord(gameBoardState) {
+  for (let currRow = 0; currRow < GAME_BOARD_HEIGHT; currRow++) {
+    for (let currColumn = 0; currColumn < GAME_BOARD_WIDTH; currColumn++) {
+      if (gameBoardState[currRow][currColumn].lastGuessed) {
+        return [currRow, currColumn];
+      }
+    }
+  }
+  return null;
 }
 
 export function createGameBoard(wordList, redGoesFirst) {

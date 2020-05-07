@@ -5,7 +5,6 @@ let USER_CREDENTIAL = null;
 
 export async function loginUser() {
   USER_CREDENTIAL = await firebase.auth().signInAnonymously();
-  console.log("SIGNED IN");
   return USER_CREDENTIAL.user.uid;
 }
 
