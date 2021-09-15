@@ -1,3 +1,5 @@
+- test
+
 - display message if no room found with given code
   - make sure its case / whitespace insensitive
 - require non-empty name
