@@ -14,13 +14,11 @@ export default class PlayerListItem extends React.Component {
   };
 
   render() {
-    const showRoleSelector = 
-      (getCurrentUserID() === this.props.playerData.uid)
-      && !this.props.playerData.role;
+    const showRoleSelector = (getCurrentUserID() === this.props.playerData.uid);
     
     const roleUI = showRoleSelector ?
         <PlayerRoleSelector gameID={this.props.gameID} players={this.props.allPlayers}/> :
-        <PlayerRole roleType={this.props.playerData.role}/>;
+        <PlayerRole isRoleSelectorToggle={showRoleSelector} roleType={this.props.playerData.role}/>;
 
     let wrapperClass = "Player-list-item-wrapper";
     if (this.props.darkCSS) {

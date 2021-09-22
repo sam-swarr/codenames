@@ -9,6 +9,8 @@ import {getRoleLabel, ROLES} from './Utils';
 
 export default class PlayerRole extends React.Component {
   static propTypes = {
+    onRoleSelectorToggleClick: PropTypes.func,
+    isRoleSelectorToggle: PropTypes.bool,
     roleType: PropTypes.string,
   };
 
@@ -40,10 +42,17 @@ export default class PlayerRole extends React.Component {
     }
 
     return (
-        <div className={"Player-role-selector-button-contents-wrapper"}>
+        <div
+          className={"Player-role-selector-button-contents-wrapper"}
+          ref={this.props.roleSelectorToggleRef}
+          onClick={(e) => {
+            if (this.props.isRoleSelectorToggle) {
+              this.props.onRoleSelectorToggleClick(e);
+            }
+          }}>
             <div className={labelWrapperClass}>
                 <div className={"Player-role-selector-label"}>
-                <p>{getRoleLabel(this.props.roleType)}</p>
+                  <p>{getRoleLabel(this.props.roleType)}</p>
                 </div>
             </div>
             {roleLogo}

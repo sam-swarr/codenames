@@ -407,18 +407,11 @@
 }
 
 .Role-selector-dropdown-button {
-  margin-top: 0.5vh;
-}
-
-.Role-selector-dropdown-button .btn {
     background: #c1c1c1;
     border: 0 solid;
     border-radius: 5px;
-    box-shadow: 0.5vh 0.5vh 0.25vh 0 #000000;
     font-family: 'Didact Gothic';
     font-size: 2vh;
-    height: 5vh;
-    width: 25vw;
 }
 
 .Role-selector-dropdown-button .dropdown-menu {
@@ -440,6 +433,10 @@
   display: inline-block;
   height: 8vh;
   width: 25vw;
+}
+
+.Role-selector-dropdown-button .Player-role-selector-label-wrapper {
+  color: black;
 }
 
 .Player-role-selector-label-wrapper.no-role {

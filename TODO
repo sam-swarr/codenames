@@ -7,8 +7,6 @@
 
 - be able to re-select a role after initial selection
 
-- add collapsable menu UI to top bar
-
 - datastore validation rule to ensure logged in user can only add / remove themselves from player lists
 
 - cant re-reveal hidden word on mobile
