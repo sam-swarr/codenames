@@ -34,6 +34,7 @@ export default class App extends React.Component {
     var roomCode = createRoomCode();
     const newGameRef = firebase.database().ref('games').push();
     const players = {};
+    // Uncomment this to easily test a game without needing to connect a bunch of players manually
     // const players = {
     //   test_player_1: {
     //     name: 'bob',

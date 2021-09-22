@@ -296,7 +296,6 @@
   background: #7e7cf75c;
 }
 
-
 .Game-status-wrapper.player-info-hidden {
   border-top: 0;
 }
@@ -377,8 +376,26 @@
   width: 40vw;
 }
 
-.Room-code-display {
+.Game-info-top-bar-wrapper {
   border-bottom: 0.5vh solid #504e4e;
+  display: flex;
+  justify-content: center;
+}
+
+.Room-code-display-left-spacer {
+  width: 10%
+}
+
+.Room-code-display-wrapper {
+  width: 75%;
+}
+
+.Player-info-chevron-wrapper {
+  height: 6vh;
+  width: 10%;
+}
+
+.Room-code-display {
   font-size: 2.2vh;
   height: 3vh;
   margin: 0;
