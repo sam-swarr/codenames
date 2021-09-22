@@ -6,6 +6,7 @@ import PlayerListItem from './PlayerListItem';
 export default class PlayerList extends React.Component {
   static propTypes = {
     gameID: PropTypes.string,
+    gameStatus: PropTypes.string,
     players: PropTypes.object,
   };
 
@@ -16,6 +17,7 @@ export default class PlayerList extends React.Component {
         key={playerID}
         allPlayers={this.props.players}
         gameID={this.props.gameID}
+        gameStatus={this.props.gameStatus}
         playerData={this.props.players[playerID]}
         darkCSS={count++ % 2 === 0}/>;
     });

@@ -96,7 +96,7 @@ export default class GameInfo extends React.Component {
             </div>
           </div>
           <div hidden={!this.state.expanded}>
-            <PlayerList gameID={this.props.gameID} players={this.props.players} />
+            <PlayerList gameID={this.props.gameID} gameStatus={this.props.gameStatus} players={this.props.players} />
           </div>
         </div>
         <div className={this._getGameStatusWrapperClass()}>
