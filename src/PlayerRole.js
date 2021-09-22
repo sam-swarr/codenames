@@ -29,6 +29,13 @@ export default class PlayerRole extends React.Component {
     }
   }
 
+  _getLabel() {
+    if (this.props.isRoleSelectorToggle && !this.props.roleType) {
+      return "Select Role";
+    }
+    return getRoleLabel(this.props.roleType);
+  }
+
   render() {
     const roleLogo = this.props.roleType ?
         <div className="Role-selector-logo-wrapper">
@@ -39,6 +46,9 @@ export default class PlayerRole extends React.Component {
     let labelWrapperClass = "Player-role-selector-label-wrapper";
     if (this.props.roleType == null) {
         labelWrapperClass += " no-role";
+    }
+    if (this.props.isRoleSelectorToggle) {
+        labelWrapperClass += " dark-font";
     }
 
     return (
@@ -52,7 +62,7 @@ export default class PlayerRole extends React.Component {
           }}>
             <div className={labelWrapperClass}>
                 <div className={"Player-role-selector-label"}>
-                  <p>{getRoleLabel(this.props.roleType)}</p>
+                  <p>{this._getLabel()}</p>
                 </div>
             </div>
             {roleLogo}

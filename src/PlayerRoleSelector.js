@@ -50,24 +50,32 @@ export default class PlayerRoleSelector extends React.Component {
           <Dropdown className="Role-selector-dropdown-button">
             <Dropdown.Toggle as={CustomToggle}/>
             <Dropdown.Menu>
-              <PlayerRoleButton
-                roleType={ROLES.BLUE_SPYMASTER}
-                onClick={this.onClick.bind(this, ROLES.BLUE_SPYMASTER)}
-                disabled={this._roleTaken(ROLES.BLUE_SPYMASTER)}
-              />
-              <PlayerRoleButton
-                roleType={ROLES.RED_SPYMASTER}
-                onClick={this.onClick.bind(this, ROLES.RED_SPYMASTER)}
-                disabled={this._roleTaken(ROLES.RED_SPYMASTER)}
-              />
-              <PlayerRoleButton
-                roleType={ROLES.BLUE_SPY}
-                onClick={this.onClick.bind(this, ROLES.BLUE_SPY)}
-              />
-              <PlayerRoleButton
-                roleType={ROLES.RED_SPY}
-                onClick={this.onClick.bind(this, ROLES.RED_SPY)}
-              />
+              <Dropdown.Item>
+                <PlayerRoleButton
+                  roleType={ROLES.BLUE_SPYMASTER}
+                  onClick={this.onClick.bind(this, ROLES.BLUE_SPYMASTER)}
+                  disabled={this._roleTaken(ROLES.BLUE_SPYMASTER)}
+                />
+              </Dropdown.Item>
+              <Dropdown.Item>
+                <PlayerRoleButton
+                  roleType={ROLES.RED_SPYMASTER}
+                  onClick={this.onClick.bind(this, ROLES.RED_SPYMASTER)}
+                  disabled={this._roleTaken(ROLES.RED_SPYMASTER)}
+                />
+              </Dropdown.Item>
+              <Dropdown.Item>
+                <PlayerRoleButton
+                  roleType={ROLES.BLUE_SPY}
+                  onClick={this.onClick.bind(this, ROLES.BLUE_SPY)}
+                />
+              </Dropdown.Item>
+              <Dropdown.Item>
+                <PlayerRoleButton
+                  roleType={ROLES.RED_SPY}
+                  onClick={this.onClick.bind(this, ROLES.RED_SPY)}
+                />
+              </Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
         </div>

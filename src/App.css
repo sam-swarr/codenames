@@ -416,7 +416,6 @@
 
 .Role-selector-dropdown-button .dropdown-menu {
   display: none;
-  margin-left: -7.5vw;
   width: 40vw;
 }
 
@@ -435,7 +434,7 @@
   width: 25vw;
 }
 
-.Role-selector-dropdown-button .Player-role-selector-label-wrapper {
+.Player-role-selector-label-wrapper.dark-font {
   color: black;
 }
 
