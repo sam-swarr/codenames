@@ -88,16 +88,17 @@
   font-family: 'Didact Gothic';
   font-size: 1.7vh;
   height: 4vh;
-  width: 40vw;
+  width: min(40vw, 330px);
 }
 
 .Credit-line {
   bottom: 1vh;
-  color: #c7c7c7;
+  color: #939292;
   font-size: 1.3vh;
   margin-top: 20px;
   position: fixed;
   right: 2vw;
+  text-align: end;
 }
 
 .Game-screen-root {
@@ -185,7 +186,7 @@
   border-radius: 10px;
   color: white;
   font-size: 2.3vh;
-  width: 50%;
+  width: min(50%, 330px);
 }
 
 .Submit-guess-button-wrapper {

@@ -140,7 +140,15 @@ export default class App extends React.Component {
               shakeRoomCode={this.state.invalidRoomCode}
             />
             <div className="Credit-line">
-              Built by Sam Swarr
+              <div>
+                App built by Sam Swarr
+              </div>
+              <div>
+                Codenames designed by Vlaada Chvátil
+              </div>
+              <div>
+                Published by Czech Games Edition
+              </div>
             </div>
           </header>
         </div>
